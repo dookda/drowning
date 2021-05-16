@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบเฝ้าระวังการจมน้ำ เขตสุขภาพที่2 กระทรวงสาธารณสุข</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Kanit', sans-serif;
+    }
+
+    .mt-100 {
+        margin-top: 100px;
+    }
+
+    .mt-80 {
+        margin-top: 80px;
+    }
+
+    .b {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .m {
+        margin: 2 2 2 2px;
+    }
+
+    .mt-5 {
+        margin-top: 5px;
+    }
+
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .mt-20 {
+        margin-top: 20px;
+    }
+
+    .mt-45 {
+        margin-top: 45px;
+    }
+
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+
+    #map {
+        height: 360px;
+    }
+
+    .pill-nav a {
+        display: block;
+        color: black;
+        padding: 10px;
+        margin: 3px 3px 3px 3px;
+        text-decoration: none;
+        font-size: 17px;
+        border-radius: 5px;
+    }
+
+    .pill-nav a:hover {
+        margin: 3px 3px 3px 3px;
+        background-color: #ddd;
+        color: black;
+    }
+
+    .pill-nav a.active {
+        background-color: rgb(200, 201, 202);
+        color: black;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" width="180" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="nav navbar-nav ml-auto w-100 pill-nav justify-content-end"">
+                    <li class=" nav-item">
+                    <a class="nav-link" href="./_drowning_map.html">แผนที่เด็กจมน้ำ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./_calendar.html">ปฏิทินกิจกรรม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./_media.html">สื่อประชาสัมพันธ์ </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./_about_us.html">ติดต่อสอบถาม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a><i class="bi bi-person-square"></i>&nbsp; <span id="auth"></span></a>
+                    </li>
+                    <li class="nav-item" id="logout">
+                        <a class="nav-link" onclick="logout()">ออกจากระบบ</a>
+                    </li>
+                    <li class="nav-item" id="login">
+                        <a class="nav-link" onclick="logout()">เข้าสู่ระบบ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-100 mb-20">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="card">
+                    <nav class="pill-nav">
+                        <a class="" href="./index.html">หน้าหลัก</a>
+                        <a class="" href="./_report_invest.html">รายงานสอบสวน</a>
+                        <a class="" href="./_report_water_resource_survey.html">แหล่งน้ำเสี่ยง</a>
+                        <a class="" href="./_report_team.html">ทีมผู้ก่อการดี</a>
+                        <a class="" href="./_report_pop.html">ประชากร 0-14ปี</a>
+                        <a class="" href="_report_risk.html"> กลุ่มเสี่ยง</a>
+                        <a class="" href="./_report_media.html"> จัดการสื่อประชาสัมพันธ์ </a>
+                        <a class="active" href="./_report_user.html"> จัดการผู้ใช้งาน </a>
+                    </nav>
+
+                </div>
+            </div>
+            <div class="col-sm-10">
+
+                <div class="card">
+                    <div class="card-header">
+                        เพิ่มผู้ใช้
+                    </div>
+                    <div class="card-body">
+
+                        <form method="post" id="formExp" name="frmMain" action="./service/user_insert.php">
+
+                            <input type="hidden" class="form-control" id="token" name="token"
+                                value="$2y$10$j3dXzcAfyuBzNBN0lGRd0.N3jnkknlnEGgtj7Kxi0G6OZy0yr8d8W">
+                            <input type="hidden" class="form-control" id="registration_ip" name="registration_ip">
+
+                            <div class="form-group ">
+                                <label class="control-label">ชื่อผู้ใช้</label>
+                                <input type="text" id="username" class="form-control" name="username" required>
+                                <span class="badge bg-warning text-dark" id="usernamecheck">ชื่อนี้ถูกใช้แล้ว</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input type="email" id="email" class="form-control" name="email" required>
+                                <span class="badge bg-warning text-dark" id="emailcheck">email นี้ถูกใช้แล้ว</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Password</label>
+                                <input type="password" id="password" class="form-control" name="password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">กรอก Password อีกครั้ง</label>
+                                <input type="password" id="passwordr" class="form-control" name="passwordr" required>
+                            </div>
+                            <span class="badge bg-warning text-dark" id="passcheck">password ไม่เหมือนกัน</span>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label>จังหวัด</label>
+                                    <select class='form-select' id="ddlPro" name="procode"
+                                        onChange="listAmp(this.value)" required>
+                                        <option selected value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div class="form-group">
+                                    <label>อำเภอ</label>
+                                    <select class='form-select' id="ddlAmp" name="ampcode" required></select>
+                                </div>
+                            </div>
+                            <hr>
+                            <button type="submit" class="btn btn-success"><i
+                                    class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
+                            <a href="./_report_user.html" class="btn btn-outline-info"><i
+                                    class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้าผู้ใช้</a>
+                        </form>
+                    </div>
+                    <!-- /#page-wrapper -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script>
+        let drowning_id = sessionStorage.getItem('drowning_id');
+        let drowning_username = sessionStorage.getItem('drowning_username');
+
+        let logout = () => {
+            sessionStorage.clear();
+            location.href = "./_form_login.html";
+        }
+
+        $("#logout").hide()
+        $("#login").hide()
+        // console.log(uid, org);
+        if (drowning_id && drowning_username == "admin") {
+            $("#auth").html(`${drowning_username}`)
+            $("#logout").show()
+        } else {
+            $("#login").show()
+            // location.href = "./_form_login.html";
+        }
+
+        $("#passcheck").hide();
+        $("#emailcheck").hide();
+        $("#usernamecheck").hide();
+        $(':input[type="submit"]').prop('disabled', true);
+        // let username = $("#username").val()
+        // console.log(username);
+
+        $("#username").keyup(r => {
+            $.post("./service/user_check.php", { type: "username", username: $("#username").val() }).done(r => {
+                let data = JSON.parse(r)
+
+                if (data.data[0].cnt > 0) {
+                    $("#usernamecheck").show();
+                    $(':input[type="submit"]').prop('disabled', false);
+                } else {
+                    $("#usernamecheck").hide();
+                }
+            })
+
+        })
+
+        $("#email").keyup(r => {
+            $.post("./service/user_check_email.php", { type: "email", email: $("#email").val() }).done(r => {
+                let data = JSON.parse(r)
+                console.log(data);
+                if (data.data[0].cnt > 0) {
+                    $("#emailcheck").show();
+                    $(':input[type="submit"]').prop('disabled', false);
+                } else {
+                    $("#emailcheck").hide();
+                }
+            })
+        })
+
+        $("#passwordr").keyup(r => {
+            if ($("#passwordr").val() == $("#password").val()) {
+                $("#passcheck").hide();
+                $(':input[type="submit"]').prop('disabled', false);
+            } else {
+                $("#passcheck").show();
+            }
+        })
+
+        function listPro() {
+            $.get("./service/api.php?type=pro").done(r => {
+                const datArr = JSON.parse(r)
+                datArr.data.map(i => $("#ddlPro").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function listAmp(code) {
+            $.get("./service/api.php?type=amp&code=" + code).done(r => {
+                const datArr = JSON.parse(r)
+                $("#ddlAmp").empty()
+                $("#ddlAmp").append(`<option value=""></option>`)
+                datArr.data.map(i => $("#ddlAmp").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        listPro()
+
+        $.getJSON('https://api.db-ip.com/v2/free/self', (r) => {
+            // console.log(r.ipAddress);
+            $("#registration_ip").val(r.ipAddress)
+        });
+
+    </script>
+</body>
+
+</html>
