@@ -1,7 +1,7 @@
 <?php
     include("./connect.php");
     $username = $_POST["username"];
-    $password_hash = md5($_POST["password"]);
+    $password_hash = $_POST["password"];
     $datArr = array();
     $products_arr["data"]=array();
     $strSQL = "SELECT id, username FROM user 

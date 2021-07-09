@@ -157,19 +157,19 @@
                         </div>
                         <h5>เลือกจังหวัดและประเภทที่ต้องการสืบค้น</h5>
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>จังหวัด</label>
                                     <select class='form-select filter-pro' id="ddlPro" name="drowning_province"
-                                        onChange="ListAmp(this.value)" data-column-index='8'>
+                                        onChange="ListAmp(this.value)" data-column-index='9'>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>อำเภอ</label>
                                     <select class='form-select filter-amp' id="ddlAmp" name="drowning_amphur"
-                                        onChange="ListTam(this.value)" data-column-index='7'>
+                                        onChange="ListTam(this.value)" data-column-index='8'>
                                     </select>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                 <div class="form-group">
                                     <label>ตำบล</label>
                                     <select class='form-select filter-tam' id="ddlTam" name="txtDistrict"
-                                        data-column-index='6'>
+                                        data-column-index='7'>
                                     </select>
                                 </div>
                             </div>
@@ -210,6 +210,20 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label>ปีที่สำรวจ</label>
+                                    <select class="form-select filter-year" name="year" data-column-index='10'>
+                                        <option value="">ทุกปี</option>
+                                        <option value="2560">2560</option>
+                                        <option value="2561">2561</option>
+                                        <option value="2562">2562</option>
+                                        <option value="2563">2563</option>
+                                        <option value="2564">2564</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,6 +242,7 @@
                                     <th>tam</th>
                                     <th>amp</th>
                                     <th>prov</th>
+                                    <th>ปี</th>
                                     <th>เพิ่มเติม</th>
                                 </tr>
                             </thead>
@@ -316,6 +331,7 @@
                     { data: 'tambon' },
                     { data: 'amphur' },
                     { data: 'province' },
+                    { data: 'yr' },
                     {
                         data: null,
                         render: function (data, type, row, meta) {
@@ -335,9 +351,9 @@
             });
 
             // dtable.column(1).visible(false);
-            dtable.column(6).visible(false);
             dtable.column(7).visible(false);
             dtable.column(8).visible(false);
+            dtable.column(9).visible(false);
 
             dtable.on('search.dt', function () {
                 let data = dtable.rows({ search: 'applied' }).data()
@@ -366,6 +382,11 @@
             });
 
             $('.filter-type').on('keyup change', function () {
+                dtable.search('');
+                dtable.column($(this).data('columnIndex')).search(this.value).draw();
+            });
+
+            $('.filter-year').on('keyup change', function () {
                 dtable.search('');
                 dtable.column($(this).data('columnIndex')).search(this.value).draw();
             });

@@ -151,8 +151,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Email</label>
-                                <input type="text" id="email" class="form-control" name="email" disabled>
+                                <label class="control-label">รหัสผ่าน</label>
+                                <input type="text" id="password_hash" class="form-control" name="password_hash"
+                                    disabled>
                             </div>
 
                             <div class="form-group">
@@ -213,7 +214,7 @@
             let data = JSON.parse(r)
             // console.log(data);
             $("#username").val(data.data[0].username)
-            $("#email").val(data.data[0].email)
+            $("#password_hash").val(data.data[0].password_hash)
             $("#ip").val(data.data[0].registration_ip)
             $("#ampcode").val(data.data[0].ampcode)
         })

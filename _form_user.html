@@ -156,11 +156,11 @@
                                 <span class="badge bg-warning text-dark" id="usernamecheck">ชื่อนี้ถูกใช้แล้ว</span>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <input type="email" id="email" class="form-control" name="email" required>
                                 <span class="badge bg-warning text-dark" id="emailcheck">email นี้ถูกใช้แล้ว</span>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label class="control-label">Password</label>
@@ -248,18 +248,18 @@
 
         })
 
-        $("#email").keyup(r => {
-            $.post("./service/user_check_email.php", { type: "email", email: $("#email").val() }).done(r => {
-                let data = JSON.parse(r)
-                console.log(data);
-                if (data.data[0].cnt > 0) {
-                    $("#emailcheck").show();
-                    $(':input[type="submit"]').prop('disabled', false);
-                } else {
-                    $("#emailcheck").hide();
-                }
-            })
-        })
+        // $("#email").keyup(r => {
+        //     $.post("./service/user_check_email.php", { type: "email", email: $("#email").val() }).done(r => {
+        //         let data = JSON.parse(r)
+        //         console.log(data);
+        //         if (data.data[0].cnt > 0) {
+        //             $("#emailcheck").show();
+        //             $(':input[type="submit"]').prop('disabled', false);
+        //         } else {
+        //             $("#emailcheck").hide();
+        //         }
+        //     })
+        // })
 
         $("#passwordr").keyup(r => {
             if ($("#passwordr").val() == $("#password").val()) {

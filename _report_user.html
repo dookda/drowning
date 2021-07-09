@@ -193,7 +193,7 @@
                                 <tr>
                                     <th>ที่</th>
                                     <th>ชื่อ</th>
-                                    <th>e-mail</th>
+                                    <th>รหัสผ่าน</th>
                                     <th>ip ที่ลงทะเบียน</th>
                                     <!-- <th>วันที่ลงทะเบียน</th> -->
                                     <!-- <th>last login</th> -->
@@ -275,18 +275,8 @@
                         }
                     },
                     { data: 'username' },
-                    { data: 'email' },
+                    { data: 'password_hash' },
                     { data: 'registration_ip' },
-                    // { data: 'created_at' },
-                    // { data: 'last_login_at' },
-                    // { data: 'flags' },{
-                    // {
-                    //     data: null,
-                    //     render: function (data, type, row, meta) {
-                    //         console.log(row);
-                    //         return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail('${row.ampurcode}','${row.byear}')"><i class="bi bi-journal-richtext"></i>&nbsp;block การเข้าใช้งาน</button>`
-                    //     }
-                    // },
                     {
                         data: null,
                         render: function (data, type, row, meta) {
