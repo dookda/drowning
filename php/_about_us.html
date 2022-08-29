@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบเฝ้าระวังการจมน้ำ เขตสุขภาพที่2 กระทรวงสาธารณสุข</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <!-- <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css"> -->
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./dist/leaflet.awesome-markers.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Kanit', sans-serif;
+    }
+
+    .mt-100 {
+        margin-top: 100px;
+    }
+
+    .mt-80 {
+        margin-top: 80px;
+    }
+
+    .b {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .m {
+        margin: 2 2 2 2px;
+    }
+
+    .mt-5 {
+        margin-top: 5px;
+    }
+
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .mt-20 {
+        margin-top: 20px;
+    }
+
+    .mt-45 {
+        margin-top: 45px;
+    }
+
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+
+    #map {
+        height: 480px;
+    }
+
+    .pill-nav a {
+        display: block;
+        color: black;
+        padding: 10px;
+        margin: 3px 3px 3px 3px;
+        text-decoration: none;
+        font-size: 17px;
+        border-radius: 5px;
+    }
+
+    .pill-nav a:hover {
+        margin: 3px 3px 3px 3px;
+        background-color: #ddd;
+        color: black;
+    }
+
+    .pill-nav a.active {
+        background-color: rgb(200, 201, 202);
+        color: black;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" width="180" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="nav navbar-nav ml-auto w-100 pill-nav justify-content-end"">
+                    <li class=" nav-item">
+                    <a class="nav-link " href="./_drowning_map.html">แผนที่เด็กจมน้ำ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./_calendar.html">ปฏิทินกิจกรรม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./_media.html">สื่อประชาสัมพันธ์ </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./_about_us.html">ติดต่อสอบถาม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a><i class="bi bi-person-square"></i>&nbsp; <span id="auth"></span></a>
+                    </li>
+                    <li class="nav-item" id="logout">
+                        <a class="nav-link" onclick="logout()">ออกจากระบบ</a>
+                    </li>
+                    <li class="nav-item" id="login">
+                        <a class="nav-link" onclick="logout()">เข้าสู่ระบบ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-100 mb-20">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="card">
+                    <nav class="pill-nav">
+                        <a class="" href="./index.html">หน้าหลัก</a>
+                        <a class="" href="./_report_invest.html">รายงานสอบสวน</a>
+                        <a class="" href="./_report_water_resource_survey.html">แหล่งน้ำเสี่ยง</a>
+                        <a class="" href="./_report_team.html">ทีมผู้ก่อการดี</a>
+                        <a class="" href="./_report_pop.html">ประชากร 0-14ปี</a>
+                        <a class="" href="./_report_risk.html"> กลุ่มเสี่ยง</a>
+                        <a class="" href="./_report_media.html"> จัดการสื่อประชาสัมพันธ์ </a>
+                        <a class="" href="./_report_user.html"> จัดการผู้ใช้งาน </a>
+                    </nav>
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                สคร.2
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                เกี่ยวกับเรา
+                            </div>
+                            <div class="card-body">
+                                <b>สำนักงานป้องกันควบคุมโรคที่ 2 จังหวัดพิษณุโลก</b><br />
+                                เลขที่ 306 ถ.พิษณุโลก-วัดโบสถ์ หมู่ 5 ต.หัวรอ อ.เมือง จ.พิษณุโลก 65000<br />
+                                โทร. 0-5521-4615-7 โทรสาร. 0-5532-1238<br />
+                                E-Mail : <a href="mailto:dpc9mail@gmail.com"> dpc9mail@gmail.com</a><br>
+                                Social Media : <a href="https://www.facebook.com/dpc2phs/">Facebook</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.container-fluid -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+
+    <script type="text/javascript">
+        let drowning_id = sessionStorage.getItem('drowning_id');
+        let drowning_username = sessionStorage.getItem('drowning_username');
+
+        let logout = () => {
+            sessionStorage.clear();
+            location.href = "./_form_login.html";
+        }
+
+        $("#logout").hide()
+        $("#login").hide()
+        // console.log(uid, org);
+        if (drowning_id && drowning_username) {
+            $("#auth").html(`${drowning_username}`)
+            $("#logout").show()
+        } else {
+            $("#login").show()
+        }
+
+        let latlng = {
+            lat: 16.849563510027274,
+            lng: 100.26555606409815
+        };
+
+        let map = L.map('map', {
+            center: latlng,
+            zoom: 18
+        });
+
+        const mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/light-v9',
+            tileSize: 512,
+            zoomOffset: -1
+        });
+
+        const topo = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+
+        const ghyb = L.tileLayer('https://{s}.google.com/vt/lyrs=y,m&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+        const grod = L.tileLayer('https://{s}.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        });
+
+        const marker = L.marker(latlng).addTo(map)
+
+        var baseMap = {
+            "Mapbox": mapbox,
+            "Google Hybrid": ghyb,
+            "Google Road": grod,
+            "ESRI topo": topo.addTo(map)
+        }
+
+        L.control.layers(baseMap).addTo(map);
+
+    </script>
+</body>
+
+</html>
