@@ -1,8 +1,8 @@
 <?php
     include("./connect.php");
 
-    $type = $_GET['type'];
-    $code = $_GET['code'];
+    // $type = $_GET['type'];
+    // $code = $_GET['code'];
 
     $datArr = array();
     $products_arr["data"]=array();

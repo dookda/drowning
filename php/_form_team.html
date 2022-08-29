@@ -106,7 +106,7 @@
                         <a class="nav-link" href="./_about_us.html">ติดต่อสอบถาม</a>
                     </li>
                     <li class="nav-item">
-                        <a><i class="bi bi-person-square"></i>&nbsp; <span id="auth"></span></a>
+                        <a> <span id="auth"></span></a>
                     </li>
                     <li class="nav-item" id="logout">
                         <a class="nav-link" onclick="logout()">ออกจากระบบ</a>
@@ -216,11 +216,11 @@
         $("#login").hide()
         // console.log(uid, org);
         if (drowning_id && drowning_username == "admin") {
-            $("#auth").html(`${drowning_username}`)
+            $("#auth").html(`<i class="bi bi-person-square"></i>&nbsp;${drowning_username}`)
             $("#logout").show()
         } else {
             $("#login").show()
-            location.href = "./_form_login.html";
+            // location.href = "./_form_login.html";
         }
 
         function ListPro() {

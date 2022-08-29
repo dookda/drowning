@@ -309,7 +309,7 @@
                                 <div class="input-group">
                                     <input type="number" name="age" class="form-control">
                                 </div>
-								<label class="b">อายุ (เดือน)</label>
+                                <label class="b">อายุ (เดือน)</label>
                                 <div class="input-group">
                                     <input type="number" name="ageMonth" class="form-control">
                                 </div>
@@ -378,15 +378,15 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ละติจูด</label>
-                                        <input type="number" class="form-control" id="location_lat"
-                                            name="location_lat"> <!-- step="0.01" -->
+                                        <input type="number" class="form-control" id="location_lat" name="location_lat">
+                                        <!-- step="0.01" -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ลองติจูด</label>
-                                        <input type="number" class="form-control" id="location_lon"
-                                            name="location_lon"> <!-- step="0.01" -->
+                                        <input type="number" class="form-control" id="location_lon" name="location_lon">
+                                        <!-- step="0.01" -->
                                     </div>
                                 </div>
                             </div>
@@ -770,12 +770,12 @@
                                                 class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
-                                
+
                                 <label class="">** ปีของข้อมูลที่เอามาคีย์(ปี ค.ศ.)</label>
                                 <div class="">
                                     <input type="text" name="s_year" class="form-control" required>
                                 </div>
-                                
+
                             </div>
 
                         </div>
@@ -893,96 +893,96 @@
         ListPro()
         ListProHome()
         RePro()
-<!------------------------ยกเลิก radio------------------------------>
-		var allRadios = document.getElementsByName('home_addr');
+        // <!------------------------ยกเลิก radio------------------------------>
+        var allRadios = document.getElementsByName('home_addr');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
         }
 
-		var allRadios = document.getElementsByName('txtAddr');
+        var allRadios = document.getElementsByName('txtAddr');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
         }
 
-		var allRadios = document.getElementsByName('drowning_accessory');
+        var allRadios = document.getElementsByName('drowning_accessory');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
         }
 
-		var allRadios = document.getElementsByName('drowning_accessory_yes');
+        var allRadios = document.getElementsByName('drowning_accessory_yes');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
         }
 
-		var allRadios = document.getElementsByName('ไม่มี');
+        var allRadios = document.getElementsByName('ไม่มี');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
         }
-        
-		var allRadios = document.getElementsByName('มี');
+
+        var allRadios = document.getElementsByName('มี');
         var booRadio;
         var x = 0;
-        for(x = 0; x < allRadios.length; x++){
+        for (x = 0; x < allRadios.length; x++) {
 
-            allRadios[x].onclick = function() {
-                if(booRadio == this){
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
                     this.checked = false;
                     booRadio = null;
-                }else{
+                } else {
                     booRadio = this;
                 }
             };
-        }        
+        }
 
 
 

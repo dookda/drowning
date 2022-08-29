@@ -143,15 +143,15 @@
 
             <div class="col-sm-10">
 
-                <form name="frmMain">
+                <form name="frmMain" method="post" action="./service/invest_update.php" enctype="multipart/form-data">
                     <h2 class="page-header">แบบรายงานผู้บาดเจ็บหรือเสียชีวิตจากการตกน้ำ จมน้ำ</h2>
-
                     <div class="card">
                         <div class="card-header">
                             ก. รายละเอียดของเคส
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <input type="hidden" name="gid" id="gid">
                                 <label>เลขประจำตัวประชาชน</label>
                                 <input name="cid" id="cid" class="form-control">
 
@@ -554,8 +554,8 @@
                     </div>
                     <hr>
                     <!-- <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button> -->
-                    <!-- <button type="submit" class="btn btn-success"><i
-                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp; -->
+                    <button type="submit" class="btn btn-success"><i
+                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
                     <a href="./_report_invest.html" class="btn btn-outline-info"><i
                             class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานสอบสวน</a>
 
@@ -697,6 +697,7 @@
 
             data.data.map(i => {
                 console.log(i)
+                $('#gid').val(i.gid);
                 $('#cid').val(i.cid);
                 $('#icd_code').val(i.icd_code);
                 $('#drowning_date').val(i.drowning_date);
@@ -818,6 +819,7 @@
             })
 
         })
+
 
 
     </script>

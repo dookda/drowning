@@ -16,7 +16,7 @@
 				}
 			}
 
-            $filename = "uploads/pic_".$cid."_".$_FILES["filUpload"]["name"];
+            $filename = "uploads/pic_".$gid."_".$_FILES["filUpload"]["name"];
 
             if(move_uploaded_file($_FILES["filUpload"]["tmp_name"],"./../".$filename))
             {
