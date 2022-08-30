@@ -42,7 +42,8 @@
         }
     }elseif($type=="statByMonth"){
         $strSQL   = "SELECT MONTH(drowning_date) as dmonth, COUNT(drowning_date) AS dcase
-            FROM report_dead WHERE s_year = '$year'
+            FROM report_dead 
+            WHERE s_year = '$year' AND age <= 15
             GROUP BY MONTH(drowning_date) ORDER BY MONTH(drowning_date)";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
@@ -50,7 +51,8 @@
         }
     }elseif($type=="statByType"){
         $strSQL   = "SELECT DISTINCT drowning_type as dtype, count(drowning_type) as dcnt
-            FROM report_dead WHERE s_year = '$year'
+            FROM report_dead 
+            WHERE s_year = '$year' AND age <= 15
             GROUP BY drowning_type";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
