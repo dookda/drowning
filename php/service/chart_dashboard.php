@@ -7,16 +7,35 @@
     $products_arr["data"]=array();
 
     if($type=="statByTab"){
-        $strSQL = "SELECT drowning_province as pro, COUNT(drowning_after_dead) AS total,
-            COUNT(drowning_after_dead) - SUM(if(drowning_after_dead='ไม่เสียชีวิต',1, 0 )) AS dead,
-            SUM(if(drowning_after_dead='ไม่เสียชีวิต',1, 0 )) AS alive
-            FROM report_dead WHERE s_year = '$year' AND age <= 15 GROUP BY drowning_province";
+        // $strSQL = "SELECT drowning_province as pro, COUNT(drowning_after_dead) AS total,
+        //     COUNT(drowning_after_dead) - SUM(if(drowning_after_dead='ไม่เสียชีวิต',1, 0 )) AS dead,
+        //     SUM(if(drowning_after_dead='ไม่เสียชีวิต',1, 0 )) AS alive
+        //     FROM report_dead WHERE s_year = '$year' AND age <= 15 GROUP BY drowning_province";
+        $strSQL = "SELECT drowning_province as pro,
+                    sum(CASE WHEN age <= 15 THEN drowning_number_dead ELSE 0 END) as dead_lt15,
+                    sum(CASE WHEN age > 15 THEN drowning_number_dead ELSE 0 END) as dead_gt15,
+                    sum(CASE WHEN age >= 0 THEN drowning_number_dead ELSE 0 end) as dead_total,
+                    sum(CASE WHEN age <= 15 THEN drowning_number_alive ELSE 0 END) as alive_lt15,
+                    sum(CASE WHEN age > 15 THEN drowning_number_alive ELSE 0 END) as alive_gt15,
+                    sum(CASE WHEN age >= 0 THEN drowning_number_alive ELSE 0 END) as alive_total
+                FROM report_dead rd 
+                WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) AND YEAR(drowning_date) =  '$year'  
+                GROUP BY drowning_province" ;  
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
             array_push($products_arr["data"], $row);
         }
     }elseif($type=="statBySex"){
-        $strSQL   = "SELECT * FROM report_dead WHERE s_year = '$year' ORDER BY id";
+        $strSQL   = "SELECT sex,
+            sum(CASE WHEN age <= 15 THEN drowning_number_dead ELSE 0 END) as dead_lt15,
+            sum(CASE WHEN age > 15 THEN drowning_number_dead ELSE 0 END) as dead_gt15,
+            sum(CASE WHEN age >= 0 THEN drowning_number_dead ELSE 0 end) as dead_total,
+            sum(CASE WHEN age <= 15 THEN drowning_number_alive ELSE 0 END) as alive_lt15,
+            sum(CASE WHEN age > 15 THEN drowning_number_alive ELSE 0 END) as alive_gt15,
+            sum(CASE WHEN age >= 0 THEN drowning_number_alive ELSE 0 END) as alive_total
+        FROM report_dead rd 
+        WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) AND YEAR(drowning_date) =  '$year' 
+        GROUP BY sex ";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
             array_push($products_arr["data"], $row);
