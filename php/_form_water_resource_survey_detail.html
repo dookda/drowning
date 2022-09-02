@@ -241,7 +241,7 @@
             $("#logout").show()
         } else {
             $("#login").show()
-            location.href = "./_form_login.html";
+            // location.href = "./_form_login.html";
         }
 
         let searchParams = new URLSearchParams(window.location.search)
@@ -279,21 +279,21 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const pro = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:province_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const amp = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:amphoe_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const tam = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:tamon_4326',
             format: 'image/png',
             transparent: true,
@@ -352,7 +352,7 @@
                 $("#surveyer").val(i.surveyer)
 
                 if (Number(i.lat) > 100) {
-                    $.get("https://rti2dss.com:3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
+                    $.get("https://rti2dss.com/p3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
                         console.log(r.data[0])
                         let latlon = [Number(r.data[0].lat), Number(r.data[0].lon)]
                         map.setView(latlon, 13);

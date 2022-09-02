@@ -385,11 +385,12 @@
 
                             if (drowning_username == "admin") {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail('${row.id}')"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>
-                                <button type="button" class="btn btn-outline-warning" onclick="gotoDetail('${row.id}')"><i class="bi bi-gear"></i>&nbsp;แก้ไขข้อมูล</button>
+                                <button type="button" class="btn btn-outline-warning" onclick="gotoEdit('${row.id}')"><i class="bi bi-gear"></i>&nbsp;แก้ไขข้อมูล</button>
                                 <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('${row.id}','${row.fname}', '${row.changwatname}')"><i class="bi bi-trash"></i>&nbsp;ลบข้อมูล</button>
                                 <button type="button" class="btn btn-outline-primary" onclick="window.open('service/2.php?id=${row.id}');"><i class="bi bi-printer"></i>&nbsp;Print</button>`
                             } else {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail('${row.id}')"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>
+                                <button type="button" class="btn btn-outline-warning" onclick="gotoEdit('${row.id}')"><i class="bi bi-gear"></i>&nbsp;แก้ไขข้อมูล</button>
                                 <button type="button" class="btn btn-outline-primary" onclick="window.open('service/1.php?id=${row.id}');"><i class="bi bi-printer"></i>&nbsp;Print</button>`
                             }
 
@@ -477,12 +478,6 @@
 
 
 
-
-
-
-
-
-
         let loadData = (d) => {
             // let dead = silver = bronze = 0;
             let alive = 0;
@@ -533,6 +528,11 @@
         let gotoDetail = (id) => {
             // console.log(ampurcode, byear);
             location.href = "./_form_invest_detail.html?id=" + id;
+        }
+
+        let gotoEdit = (id) => {
+            // console.log(ampurcode, byear);
+            location.href = "./_form_invest_detail_edit.html?id=" + id;
         }
 
         let confirmDelete = (id, fname, provname) => {

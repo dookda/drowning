@@ -506,46 +506,46 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group ">
-                                <label class="form-label">1)
-                                    ชื่อ-สกุลผู้รายงาน</label>
                                 <div class="form-group">
+                                    <label class="form-label">1)
+                                        ชื่อ-สกุลผู้รายงาน</label>
                                     <input type="text" id="report_name" class="form-control">
                                 </div>
 
-                                <label class="form-label">ตำแหน่ง</label>
                                 <div class="form-group">
+                                    <label class="form-label">ตำแหน่ง</label>
                                     <input type="text" id="report_job" class="form-control">
                                 </div>
 
-                                <label class="">2)
-                                    หน่วยงาน</label>
                                 <div class="form-group">
+                                    <label class="">2)
+                                        หน่วยงาน</label>
                                     <input type="text" id="report_office" class="form-control">
                                 </div>
 
-                                <label class="form-label">จังหวัด</label>
                                 <div class="form-group">
+                                    <label class="form-label">จังหวัด</label>
                                     <input type="text" id="report_province" class="form-control">
                                 </div>
 
-                                <label class="form-label">3)
-                                    เบอร์โทร</label>
                                 <div class="form-group">
+                                    <label class="form-label">3)
+                                        เบอร์โทร</label>
                                     <input type="text" id="report_tel" class="form-control">
                                 </div>
 
-                                <label class="form-label">โทรสาร</label>
+
                                 <div class="form-group">
+                                    <label class="form-label">โทรสาร</label>
                                     <input type="text" id="report_fax" class="form-control">
                                 </div>
 
-                                <label class="form-label">4)
-                                    วันที่รายงาน</label>
-                                <div class="">
-                                    <div class="formgroup">
-                                        <input type="date" id="report_date" class="form-control">
 
-                                    </div>
+                                <div class="formgroup">
+                                    <label class="form-label">4)
+                                        วันที่รายงาน</label>
+                                    <input type="date" id="report_date" class="form-control">
+
                                 </div>
                             </div>
 
@@ -629,21 +629,21 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const pro = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:province_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const amp = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:amphoe_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const tam = L.tileLayer.wms("https://rti2dss.com/geoserver/th/wms?", {
             layers: 'th:tamon_4326',
             format: 'image/png',
             transparent: true,
@@ -772,7 +772,7 @@
                 $('#location_lon').val(i.location_lon);
 
                 if (Number(i.lat) > 100) {
-                    $.get("https://rti2dss.com:3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
+                    $.get("https://rti2dss.com/p3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
                         // console.log(r.data[0])
                         let latlon = [Number(r.data[0].lat), Number(r.data[0].lon)]
                         map.setView(latlon, 13);
