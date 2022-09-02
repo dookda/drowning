@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  php-apache-environment:
-    container_name: php-apache
+  apache-php:
+    container_name: apache-php
     build: .
     depends_on:
       - db
@@ -13,6 +13,9 @@ services:
     container_name: db
     image: mysql
     restart: always
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./jomnam2.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: jomnam2
@@ -30,3 +33,5 @@ services:
       UPLOAD_LIMIT: 100000000
     depends_on:
       - db
+volumes:
+  dbdata:
