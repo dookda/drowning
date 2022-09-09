@@ -292,6 +292,8 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -552,7 +554,7 @@
         let loadSex = (year) => {
             $.get("./service/chart_dashboard.php?type=statBySex&year=" + year).done(async r => {
                 let data = JSON.parse(r).data
-                console.log(data);
+                // console.log(data);
                 let male = 0
                 let female = 0
                 // await data.filter(i => i.sex == "ชาย" ? male += 1 : female += 1)
@@ -706,10 +708,22 @@
             })
         }
 
+        var dom = document.getElementById('watType');
+        var myChart = echarts.init(dom, null, {
+            renderer: 'canvas',
+            useDirtyRect: false
+        });
+        var app = {};
+
+
+
         let loadWatType = (year) => {
             $.get("./service/chart_dashboard.php?type=statByType&year=" + year).done(r => {
                 let data = JSON.parse(r).data
-                // console.log(data);
+                console.log(data);
+                let cat = data.map(i => i.dtype)
+                let dat = data.map(i => i.dcnt)
+                console.log(cat, dat);
                 let a = b = c = d = e = f = g = h = i = j = k = l = m = 0;
                 data.map(i => {
                     // console.log(i);
@@ -740,6 +754,48 @@
                     }
                 })
                 // console.log([a, b, c, d, e, f, g, h, i, j, k, l]);
+
+                // var option;
+
+                // option = {
+                //     xAxis: {
+                //         type: 'category',
+                //         data: [
+                //             'กะละมัง',
+                //             'คลอง',
+                //             'ถังน้ำ',
+                //             'ท่อระบายน้ำ',
+                //             'น้ำตก',
+                //             'บ่อน้ำ-สระน้ำเพื่อการเกษตร',
+                //             'ฝายเก็บน้ำ-ฝายชะลอน้ำ',
+                //             'ห้วย',
+                //             'อ่างอาบน้ำ',
+                //             'อ่างเก็บน้ำ',
+                //             'แม่น้ำ',
+                //             'แอ่งน้ำขัง'
+                //         ]]
+                //     },
+                //     yAxis: {
+                //         type: 'value'
+                //     },
+                //     series: [
+                //         {
+                //             data: [120, 200, 150, 80, 70, 110, 130],
+                //             type: 'bar',
+                //             showBackground: true,
+                //             backgroundStyle: {
+                //                 color: 'rgba(180, 180, 180, 0.2)'
+                //             }
+                //         }
+                //     ]
+                // };
+
+                // if (option && typeof option === 'object') {
+                //     myChart.setOption(option);
+                // }
+
+                // window.addEventListener('resize', myChart.resize);
+
                 Highcharts.chart('watType', {
                     chart: {
                         type: 'column'
