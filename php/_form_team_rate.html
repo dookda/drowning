@@ -915,11 +915,20 @@
                                         </div>
                                     </div>
 
+                                    <div class="card">
+                                        <div class="card-body">
+                                            ผลประเมินตนเอง <h1><span class="badge bg-warning text-dark"
+                                                    id="rate_txt"></span></h1>
+                                            (<span id="rate_num"></span>)
+                                            คะแนน
+                                        </div>
+                                    </div>
+
                                     <hr>
                                     <button type="submit" class="btn btn-success"><i
                                             class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
-                                    <a href="./_report_team.html" class="btn btn-outline-info"><i
-                                            class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานทีมผู้ก่อการดี</a>
+                                    <!-- <a href="./_report_team.html" class="btn btn-outline-info"><i
+                                            class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานทีมผู้ก่อการดี</a> -->
                                 </form>
 
                             </div>
@@ -979,7 +988,28 @@
             })
         }
 
+        $('input[type=radio]').change(function () {
+            let ele = document.getElementsByClassName('form-check-input')
+            let rate = 0;
+            for (i = 0; i < ele.length; i++) {
+                if (ele[i].checked) {
+                    rate += Number(ele[i].value);
+                }
+            }
+
+            if (rate > 85) {
+                document.getElementById("rate_txt").innerHTML = "ผ่าน"
+                document.getElementById("rate_num").innerHTML = rate
+            } else {
+                document.getElementById("rate_txt").innerHTML = "ไม่ผ่าน"
+                document.getElementById("rate_num").innerHTML = rate
+            }
+            console.log(rate);
+        });
+
         ListPro()
+
+
 
     </script>
 </body>

@@ -15,7 +15,7 @@
 				}
 			}
 
-			$sql2 = "UPDATE team_rating SET sumrating=$sumRate WHERE cid='$cid'";
+			$sql = "UPDATE team_rating SET sumrating=$sumRate WHERE cid='$cid'";
 			mysqli_query($objCon,$sql);
 			
 			if($query) {
