@@ -8,7 +8,7 @@
     $products_arr["data"]=array();
     $strSQL = "SELECT x.*, a.ampurname, p.changwatname  FROM team x
                 INNER JOIN campur2 a ON x.ampur=a.ampurcodefull
-                INNER JOIN cchangwat2 p ON x.changwat=p.changwatcode ORDER BY x.id";
+                INNER JOIN cchangwat2 p ON x.changwat=p.changwatcode ORDER BY x.approv_date DESC";
     $objQuery = mysqli_query($objCon, $strSQL);
     while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
         array_push($products_arr["data"], $row);
