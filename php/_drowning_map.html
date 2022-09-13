@@ -231,21 +231,21 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms("http://rti2dss.com:8080/geoserver/th/wms?", {
+        const pro = L.tileLayer.wms("http://103.40.148.140:8081/geoserver/th/wms?", {
             layers: 'th:province_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const amp = L.tileLayer.wms("http://rti2dss.com:8080/geoserver/th/wms?", {
+        const amp = L.tileLayer.wms("http://103.40.148.140:8081/geoserver/th/wms?", {
             layers: 'th:amphoe_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const tam = L.tileLayer.wms("http://rti2dss.com:8080/geoserver/th/wms?", {
+        const tam = L.tileLayer.wms("http://103.40.148.140:8081/geoserver/th/wms?", {
             layers: 'th:tamon_4326',
             format: 'image/png',
             transparent: true,
