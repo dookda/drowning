@@ -352,7 +352,7 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms(geoserver + "/th/wms?", {
+        const pro = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
             layers: 'th:province_4326',
             format: 'image/png',
             transparent: true,

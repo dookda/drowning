@@ -1,3 +1,8 @@
-GET http://localhost/service/water_source_survey.php
+POST  http://localhost:3000/api/pushmsg
+content-type: application/json
+
+{
+    "userId" : "U176de9c656286feb470b121c184e1356"
+}
 
 
