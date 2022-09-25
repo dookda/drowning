@@ -34,26 +34,34 @@
             sum(CASE WHEN age > 15 THEN drowning_number_alive ELSE 0 END) as alive_gt15,
             sum(CASE WHEN age >= 0 THEN drowning_number_alive ELSE 0 END) as alive_total
         FROM report_dead rd 
-        WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) AND YEAR(drowning_date) =  '$year' 
+        WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) 
+            AND YEAR(drowning_date) =  '$year' 
         GROUP BY sex ";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
             array_push($products_arr["data"], $row);
         }
     }elseif($type=="statByMonth"){
-        $strSQL   = "SELECT MONTH(drowning_date) as dmonth, COUNT(drowning_date) AS dcase
-            FROM report_dead 
-            WHERE s_year = '$year' AND age <= 15
-            GROUP BY MONTH(drowning_date) ORDER BY MONTH(drowning_date)";
+        $strSQL   = "SELECT MONTH(drowning_date) as dmonth, 
+            sum(CASE WHEN age <= 15 THEN drowning_number_dead ELSE 0 END) as dcase
+        FROM report_dead 
+        WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) 
+            AND YEAR(drowning_date) =  '$year'  
+            AND age <= 15
+        GROUP BY MONTH(drowning_date) 
+        ORDER BY MONTH(drowning_date)";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
             array_push($products_arr["data"], $row);
         }
     }elseif($type=="statByType"){
-        $strSQL   = "SELECT DISTINCT drowning_type as dtype, count(drowning_type) as dcnt
-            FROM report_dead 
-            WHERE s_year = '$year' AND age <= 15
-            GROUP BY drowning_type";
+        $strSQL   = " SELECT drowning_type as dtype, 
+        sum(CASE WHEN age <= 15 THEN drowning_number_dead ELSE 0 END) as dcnt
+        FROM report_dead 
+        WHERE (drowning_province=53 OR drowning_province=63 OR drowning_province=64 OR drowning_province=65 OR drowning_province=67) 
+            AND YEAR(drowning_date) =  '$year'  
+            AND age <= 15
+        GROUP BY drowning_type";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
             array_push($products_arr["data"], $row);

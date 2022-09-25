@@ -143,7 +143,8 @@
 
             <div class="col-sm-10">
 
-                <form name="frmMain" method="post" action="./service/invest_update.php" enctype="multipart/form-data">
+                <form name="frmMain" method="post" action="./service/invest_update.php" enctype="multipart/form-data"
+                    novalidate>
                     <h2 class="page-header">แบบรายงานผู้บาดเจ็บหรือเสียชีวิตจากการตกน้ำ จมน้ำ</h2>
                     <div class="card">
                         <div class="card-header">
@@ -217,7 +218,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id='pname'>
+                                    <input type="text" class="form-control" name='pname' id='pname'>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="fname" id="fname" placeholder="ชื่อ">
@@ -230,7 +231,7 @@
 
                             <div class="form-group">
                                 <label class="b">3)เพศ</label>
-                                <input type="text" class="form-control" id='sex'>
+                                <input type="text" class="form-control" name='sex' id='sex'>
                             </div>
 
                             <div class="form-group">
@@ -263,19 +264,19 @@
 
                                 <div class="form-group">
                                     <label>จังหวัด</label>
-                                    <input type="text" class="form-control" id="province_addr">
+                                    <input type="text" class="form-control" name="province_addr" id="province_addr">
                                 </div>
 
                                 <div class="form-group">
                                     <label>อำเภอ</label>
 
-                                    <input type="text" class="form-control" id="amphur_addr">
+                                    <input type="text" class="form-control" name="amphur_addr" id="amphur_addr">
                                 </div>
 
                                 <div class="form-group">
                                     <label>ตำบล</label>
 
-                                    <input type="text" class="form-control" id="tambon_addr">
+                                    <input type="text" class="form-control" name="tambon_addr" id="tambon_addr">
                                 </div>
 
                             </div>
@@ -291,12 +292,12 @@
 
                             <div class="form-group">
                                 <label class="b">6)สัญชาติ</label>
-                                <input type="text" id="national" class="form-control">
+                                <input type="text" name="national" id="national" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label class="b">7)ความสามารถในการว่ายน้ำ</label>
-                                <input type="text" id="can_swim" class="form-control">
+                                <input type="text" name="can_swim" id="can_swim" class="form-control">
 
                             </div>
                             <p class="help-block">มีทักษะการเอาตัวรอดในน้ำ หมายถึง
@@ -307,12 +308,12 @@
 
                             <div class="form-group">
                                 <label class="b">8)ประเภทแหล่งน้ำที่เกิดเหตุ</label>
-                                <input type="text" id="drowning_type" class="form-control">
+                                <input type="text" name="drowning_type" id="drowning_type" class="form-control">
 
 
                                 <label>ระดับความลึก (เมตร)</label>
                                 <div class="input-group">
-                                    <input type="number" id="pool_depth" class="form-control">
+                                    <input type="number" name="pool_depth" id="pool_depth" class="form-control">
                                 </div>
                             </div>
 
@@ -337,24 +338,24 @@
 
                             <div class="form-group">
                                 <label>จังหวัด</label>
-                                <input type="text" id="drowning_province" class="form-control">
+                                <input type="text" name="drowning_province" id="drowning_province" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>อำเภอ</label>
-                                <input type="text" id="drowning_amphur" class="form-control">
+                                <input type="text" name="drowning_amphur" id="drowning_amphur" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>ตำบล</label>
-                                <input type="text" id="drowning_tambon" class="form-control">
+                                <input type="text" name="drowning_tambon" id="drowning_tambon" class="form-control">
                             </div>
 
 
                             <div class="form-group">
                                 <label>การจัดการความปลอดภัยในแหล่งน้ำ</label>
                                 <div>
-                                    <input type="text" class="form-control" id="drowning_safty">
+                                    <input type="text" class="form-control" name="drowning_safty" id="drowning_safty">
 
                                 </div>
                                 <p class="help-block">การจัดการสิ่งแวดล้อม/อุปกรณ์ เช่น รั้ว
@@ -365,13 +366,13 @@
 
                             <div class="form-group">
                                 <label class="b">9)ก่อนเกิดเหตุ(ในช่วงปกติ) ใครเป็นผู้ดูแล</label>
-                                <input type="text" class="form-control" id="before_with">
+                                <input type="text" class="form-control" name="before_with" id="before_with">
                             </div>
 
                             <div class="form-group">
                                 <label class="b">10)ขณะเกิดเหตุ(ณ จุดเกิดเหตุ)คนที่จมน้ำอยู่กับใคร</label>
 
-                                <input type="text" class="form-control" id="drowning_with">
+                                <input type="text" class="form-control" name="drowning_with" id="drowning_with">
                             </div>
 
                             <div class="row">
@@ -381,7 +382,8 @@
                                     <div class="form-group">
                                         <label class="form-label">จำนวนคนที่เกิดเหตุในเหตุการณ์เดียวกัน (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number">
+                                            <input type="number" class="form-control" name="drowning_number"
+                                                id="drowning_number">
 
                                         </div>
                                     </div>
@@ -390,7 +392,8 @@
                                     <div class="form-group">
                                         <label class="form-label">เสียชีวิต (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number_dead">
+                                            <input type="number" class="form-control" name="drowning_number_dead"
+                                                id="drowning_number_dead">
 
                                         </div>
                                     </div>
@@ -400,7 +403,8 @@
                                     <div class="form-group">
                                         <label class="form-label">จมน้ำแต่ไม่เสียชีวิต (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number_alive">
+                                            <input type="number" class="form-control" name="drowning_number_alive"
+                                                id="drowning_number_alive">
 
                                         </div>
                                     </div>
@@ -410,7 +414,7 @@
                             <div class="form-group">
                                 <label class="b">12)เหตุจูงใจการเกิดเหตุ</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_why">
+                                    <input type="text" class="form-control" name="drowning_why" id="drowning_why">
 
                                 </div>
                             </div>
@@ -418,7 +422,8 @@
                             <div class="form-group">
                                 <label class="b">13)พฤติกรรมเสี่ยงต่อการเกิดเหตุ (ตอบได้มากกว่า 1 ข้อ)</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_risk_alcohol">
+                                    <input type="text" class="form-control" name="drowning_risk_alcohol"
+                                        id="drowning_risk_alcohol">
 
                                 </div>
                             </div>
@@ -427,7 +432,7 @@
                                 <label class="b">14)ระยะทางโดยประมาณระหว่างบ้านถึงที่เกิดเหตุ (เมตร)</label>
 
                                 <div class="input-group">
-                                    <input type="text" id="drowning_length" class="form-control">
+                                    <input type="text" class="form-control" name="drowning_length" id="drowning_length">
                                 </div>
                                 <p class="help-block">ไม่ต้องระบุ หากสถานที่เกิดเหตุอยู่ภายในบ้าน
                                 </p>
@@ -437,21 +442,23 @@
                                 <label class="b">15)การใช้อุปกรณ์ช่วยลอยน้ำขณะเกิดเหตุ</label><br>
                                 <div class="form-group">
 
-                                    <input type="text" class="form-control" id="drowning_accessory_yes">
+                                    <input type="text" class="form-control" name="drowning_accessory_yes"
+                                        id="drowning_accessory_yes">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">16)หลังเกิดเหตุจมน้ำ</label><br>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_after_dead"><br>
+                                    <input type="text" class="form-control" name="drowning_after_dead"
+                                        id="drowning_after_dead"><br>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="b">17)ผู้อยู่ในเหตุการณ์
                                     ช่วยเหลือคนจมน้ำขึ้นมาจากน้ำด้วยวิธีการใด</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_helper">
+                                    <input type="text" class="form-control" name="drowning_helper" id="drowning_helper">
                                 </div>
                             </div>
 
@@ -459,7 +466,8 @@
                                 <label class="b">18)ภายหลังจากนำคนจมน้ำขึ้นมาจากน้ำ </label>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_recue_yes">
+                                    <input type="text" class="form-control" name="drowning_recue_yes"
+                                        id="drowning_recue_yes">
                                 </div>
                             </div>
 
@@ -468,7 +476,7 @@
                                     ที่ใด</label>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_refer">
+                                    <input type="text" class="form-control" name="drowning_refer" id="drowning_refer">
                                 </div>
 
                             </div>
@@ -485,7 +493,7 @@
                                 <label class="b">21)<u>หลังเกิดเหตุการณ์</u>
                                     มีการจัดแหล่งน้ำที่เกิดเหตุเพื่อป้องกันการจมน้ำ</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="defend_drowning">
+                                    <input type="text" class="form-control" name="defend_drowning" id="defend_drowning">
 
                                 </div>
                                 <p class="help-block">การจัดการแหล่งน้ำที่เกิดเหตุ เช่น สร้างรั้ว
@@ -509,42 +517,42 @@
                                 <div class="form-group">
                                     <label class="form-label">1)
                                         ชื่อ-สกุลผู้รายงาน</label>
-                                    <input type="text" id="report_name" class="form-control">
+                                    <input type="text" id="report_name" name="report_name" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label">ตำแหน่ง</label>
-                                    <input type="text" id="report_job" class="form-control">
+                                    <input type="text" id="report_job" name="report_job" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="">2)
                                         หน่วยงาน</label>
-                                    <input type="text" id="report_office" class="form-control">
+                                    <input type="text" id="report_office" name="report_office" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label">จังหวัด</label>
-                                    <input type="text" id="report_province" class="form-control">
+                                    <input type="text" id="report_province" name="report_province" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label">3)
                                         เบอร์โทร</label>
-                                    <input type="text" id="report_tel" class="form-control">
+                                    <input type="text" id="report_tel" name="report_tel" class="form-control">
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="form-label">โทรสาร</label>
-                                    <input type="text" id="report_fax" class="form-control">
+                                    <input type="text" id="report_fax" name="report_fax" class="form-control">
                                 </div>
 
 
                                 <div class="formgroup">
                                     <label class="form-label">4)
                                         วันที่รายงาน</label>
-                                    <input type="date" id="report_date" class="form-control">
+                                    <input type="date" id="report_date" name="report_date" class="form-control">
 
                                 </div>
                             </div>

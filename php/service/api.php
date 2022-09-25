@@ -13,7 +13,7 @@ $products_arr=array();
 $products_arr["data"]=array();
 
 if($_GET['type']=="pro"){
-    //$strSQL   = "SELECT * FROM cchangwat WHERE changwatcode='53' OR changwatcode='63' OR changwatcode='64' OR changwatcode='65' OR changwatcode='67' ORDER BY changwatname";
+    // $strSQL   = "SELECT * FROM cchangwat WHERE changwatcode='53' OR changwatcode='63' OR changwatcode='64' OR changwatcode='65' OR changwatcode='67' ORDER BY changwatname";
     $strSQL   = "SELECT * FROM cchangwat ORDER BY changwatname";	
     $objQuery = mysqli_query($objCon, $strSQL);
     while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){

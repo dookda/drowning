@@ -10,8 +10,8 @@
 				// print($key);
 				if(!empty($value) && $key!=='gid'){
 					$sql2 = "UPDATE report_dead SET $key='$value' WHERE gid='$gid'";
-                    print($sql2."<br/>");
-					// $query = mysqli_query($objCon,$sql2);
+                    // print($sql2."<br/>");
+					$query = mysqli_query($objCon,$sql2);
 				}
 			}
 

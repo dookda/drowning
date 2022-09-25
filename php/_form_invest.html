@@ -137,7 +137,8 @@
 
             <div class="col-sm-10">
 
-                <form name="frmMain" method="post" action="./service/invest_insert.php" enctype="multipart/form-data">
+                <form name="frmMain" method="post" action="./service/invest_insert.php" enctype="multipart/form-data"
+                    novalidate>
                     <h2 class="page-header">แบบรายงานผู้บาดเจ็บหรือเสียชีวิตจากการตกน้ำ จมน้ำ</h2>
 
                     <div class="card">
@@ -243,7 +244,7 @@
                                 <div class="form-inline">
                                     <div class="row">
                                         <div class="col-xs-4">
-                                            <input type="radio" name="txtAddr" value="ไม่ตรงตามบัตรประชาชน">
+                                            <input type="radio" name="home_addr" value="ไม่ตรงตามบัตรประชาชน">
                                             ไม่ตรงตามบัตรประชาชน
                                         </div>
 
@@ -378,16 +379,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ละติจูด</label>
-                                        <input type="number" class="form-control" id="location_lat" name="location_lat"
-                                            disabled>
+                                        <input type="number" class="form-control" id="location_lat" name="location_lat">
                                         <!-- step="0.01" -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>ลองติจูด</label>
-                                        <input type="number" class="form-control" id="location_lon" name="location_lon"
-                                            disabled>
+                                        <input type="number" class="form-control" id="location_lon" name="location_lon">
                                         <!-- step="0.01" -->
                                     </div>
                                 </div>
@@ -595,20 +594,21 @@
                                     <input type="radio" class="form-check-input" name="drowning_accessory"
                                         value="ไม่มี">
                                     ไม่มี<br>
-                                    <input type="radio" class="form-check-input" name="drowning_accessory_yes"
-                                        value="มี"> มี
-                                    <br>
-                                    <input type="radio" class="form-check-input" name="drowning_accessory_yes"
-                                        value="ขวดพลาสติก">
-                                    ขวดพลาสติก<br>
-                                    <input type="radio" class="form-check-input" name="drowning_accessory_yes"
-                                        value="ถังแกลลอน">
-                                    ถังแกลลอน<br>
-                                    <input type="radio" class="form-check-input" name="drowning_accessory_yes"
-                                        value="สวมเสื้อชูชีพ เสื้อพยุงตัว">
-                                    สวมเสื้อชูชีพ/เสื้อพยุงตัว
-                                    <input type="text" class="form-control" name="drowning_accessory_yes_des"
-                                        placeholder="ระบุ" />
+                                    <input type="radio" class="form-check-input" name="drowning_accessory" value="มี">
+                                    มี
+                                    <div style="margin-left: 35px;">
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            value="ขวดพลาสติก">
+                                        ขวดพลาสติก<br>
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            value="ถังแกลลอน">
+                                        ถังแกลลอน<br>
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            value="สวมเสื้อชูชีพ เสื้อพยุงตัว">
+                                        สวมเสื้อชูชีพ/เสื้อพยุงตัว
+                                        <input type="text" class="form-control" name="drowning_accessory_yes_des"
+                                            placeholder="ระบุ" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -649,27 +649,33 @@
 
                                 <div class="form-check">
 
-                                    <input type="radio" class="form-check-input" name="drowning_rescue_water"
+                                    <input type="radio" class="form-check-input" name="drowning_recue_water"
                                         value="ไม่ได้ปฐมพยาบาลเพราะ">
                                     ไม่ได้ปฐมพยาบาลเพราะ<br>
                                     <input type="text" placeholder="" class="form-control"
                                         name="drowning_recue_no_des" />
-                                    <input type="radio" class="form-check-input" name="drowning_recue_yes">
+                                    <p></p>
+                                    <input type="radio" class="form-check-input" name="drowning_recue_water"
+                                        value="ทำการปฐมพยาบาล">
                                     ทำการปฐมพยาบาลโดย<br>
-                                    <input type="radio" class="form-check-input" name="drowning_recue_yes"
-                                        value="CPR+เป่าปาก">
-                                    CPR+เป่าปาก<br>
-                                    <input type="radio" class="form-check-input" name="drowning_recue_yes" value="CPR">
-                                    CPR<br>
-                                    <input type="radio" class="form-check-input" name="drowning_recue_yes"
-                                        value="แบกบ่า">
-                                    แบกบ่า<br>
-                                    <input type="radio" class="form-check-input" name="drowning_recue_yes"
-                                        value="กดท้อง">
-                                    กดท้อง<br>
+                                    <div style="margin-left: 35px;">
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            value="CPR+เป่าปาก">
+                                        CPR+เป่าปาก<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            value="CPR">
+                                        CPR<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            value="แบกบ่า">
+                                        แบกบ่า<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            value="กดท้อง">
+                                        กดท้อง<br>
 
-                                    <input type="text" placeholder="ผู้ปฐมพยาบาล (ระบุ)" class="form-control"
-                                        name="drowning_rescue_yes_des" />
+                                        <input type="text" placeholder="ผู้ปฐมพยาบาล (ระบุ)" class="form-control"
+                                            name="drowning_rescue_yes_des" />
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -703,8 +709,10 @@
                                 <label class="b">21)<u>หลังเกิดเหตุการณ์</u>
                                     มีการจัดแหล่งน้ำที่เกิดเหตุเพื่อป้องกันการจมน้ำ</label>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="ไม่มี">ไม่มี<br>
-                                    <input type="radio" class="form-check-input" name="มี"> มี<br>
+                                    <input type="radio" class="form-check-input" name="defend_drowning"
+                                        value="ไม่มี">ไม่มี<br>
+                                    <input type="radio" class="form-check-input" name="defend_drowning" value="มี">
+                                    มี<br>
                                     <input type="text" placeholder="ระบุ" class="form-control"
                                         name="defend_drowning_des" />
 

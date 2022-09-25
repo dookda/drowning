@@ -554,7 +554,7 @@
         let loadSex = (year) => {
             $.get("./service/chart_dashboard.php?type=statBySex&year=" + year).done(async r => {
                 let data = JSON.parse(r).data
-                // console.log(data);
+                console.log(data);
                 let male = 0
                 let female = 0
                 // await data.filter(i => i.sex == "ชาย" ? male += 1 : female += 1)
@@ -575,7 +575,7 @@
         let loadTable = (year) => {
             $.get("./service/chart_dashboard.php?type=statByTab&year=" + year).done(async r => {
                 let data = JSON.parse(r).data
-                // console.log(data);
+                console.log(data);
                 $("tbody").empty()
                 let alive_lt15 = 0;
                 let alive_gt15 = 0;
@@ -610,23 +610,24 @@
                     $("tbody").append(
                         `<tr>
                         <td>${p}</td >
-                        <td style="text-align:center;font-weight:200;">${i.alive_lt15}</td>
-                        <td style="text-align:center;font-weight:200;">${i.alive_gt15}</td>
-                        <td style="text-align:center;font-weight:400;">${i.alive_total}</td>
+                            
                         <td style="text-align:center;font-weight:200;">${i.dead_lt15}</td>
+                        <td style="text-align:center;font-weight:200;">${i.alive_lt15}</td>
+                        <td style="text-align:center;font-weight:400;">${Number(i.dead_lt15) + Number(i.alive_lt15)}</td>
                         <td style="text-align:center;font-weight:200;">${i.dead_gt15}</td>
-                        <td style="text-align:center;font-weight:400;">${i.dead_total}</td>
+                        <td style="text-align:center;font-weight:200;">${i.alive_gt15}</td>
+                        <td style="text-align:center;font-weight:400;">${Number(i.dead_gt15) + Number(i.alive_gt15)}</td>
                     </tr >`)
                 })
                 $("tbody").append(
                     `<tr class="table-active">
                         <td>รวม</td >
-                        <td style="text-align:center; font-weight:400;">${alive_lt15}</td>
-                        <td style="text-align:center; font-weight:400;">${alive_gt15}</td>
-                        <td style="text-align:center; font-weight:400;">${alive_total}</td>
                         <td style="text-align:center; font-weight:400;">${dead_lt15}</td>
+                        <td style="text-align:center; font-weight:400;">${alive_lt15}</td>
+                        <td style="text-align:center; font-weight:400;">${Number(dead_lt15) + Number(alive_lt15)}</td>
                         <td style="text-align:center; font-weight:400;">${dead_gt15}</td>
-                        <td style="text-align:center; font-weight:400;">${dead_total}</td>
+                        <td style="text-align:center; font-weight:400;">${alive_gt15}</td>
+                        <td style="text-align:center; font-weight:400;">${Number(dead_gt15) + Number(alive_gt15)}</td>
                     </tr >`)
                 // console.log(total, dead, alive);
             })
@@ -720,10 +721,10 @@
         let loadWatType = (year) => {
             $.get("./service/chart_dashboard.php?type=statByType&year=" + year).done(r => {
                 let data = JSON.parse(r).data
-                console.log(data);
+                // console.log(data);
                 let cat = data.map(i => i.dtype)
                 let dat = data.map(i => i.dcnt)
-                console.log(cat, dat);
+                // console.log(cat, dat);
                 let a = b = c = d = e = f = g = h = i = j = k = l = m = 0;
                 data.map(i => {
                     // console.log(i);
@@ -832,13 +833,13 @@
                     yAxis: {
                         min: 0,
                         title: {
-                            text: 'จำนวนแหล่งน้ำ (แห่ง)'
+                            text: 'จำนวนผู้เสียชีวิต (ราย)'
                         }
                     },
                     tooltip: {
                         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y:.1f} แห่ง</b></td></tr>',
+                            '<td style="padding:0"><b>{point.y:.1f} ราย</b></td></tr>',
                         footerFormat: '</table>',
                         shared: true,
                         useHTML: true
@@ -850,7 +851,7 @@
                         }
                     },
                     series: [{
-                        name: 'จำนวนแหล่งน้ำ',
+                        name: 'จำนวนผู้เสียชีวิต ',
                         data: [a, b, c, d, e, f, g, h, i, j, k, l]
                     }]
                 });
