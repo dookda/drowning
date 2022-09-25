@@ -9,14 +9,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 </head>
 <style>
     body {
@@ -143,7 +140,7 @@
 
             <div class="col-sm-10">
 
-                <form name="frmMain">
+                <form>
                     <h2 class="page-header">แบบรายงานผู้บาดเจ็บหรือเสียชีวิตจากการตกน้ำ จมน้ำ</h2>
 
                     <div class="card">
@@ -152,6 +149,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <input type="hidden" name="id" id="id">
                                 <label>เลขประจำตัวประชาชน</label>
                                 <input name="cid" id="cid" class="form-control">
 
@@ -195,7 +193,7 @@
                                     <div class="form-group">
                                         <label>เวลาที่พบ</label>
                                         <div class="input-group clockpicker">
-                                            <input type="text" name="drowning_time" id="drowning_time"
+                                            <input type="time" name="drowning_time" id="drowning_time"
                                                 class="form-control" value="09:00">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-time"></span>
@@ -217,7 +215,13 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id='pname'>
+                                    <select name='pname' id='pname' class='form-select'>
+                                        <option>ด.ช.</option>
+                                        <option>ด.ญ.</option>
+                                        <option>นาย</option>
+                                        <option>นางสาว</option>
+                                        <option>นาง</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" name="fname" id="fname" placeholder="ชื่อ">
@@ -230,74 +234,109 @@
 
                             <div class="form-group">
                                 <label class="b">3)เพศ</label>
-                                <input type="text" class="form-control" id='sex'>
+                                <select name='sex' id='sex' class='form-control'>
+                                    <option>ชาย</option>
+                                    <option>หญิง</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">4)ที่พักอาศัยคนจมน้ำ</label>
-                                <div>
-                                    <input type="text" class="form-control" name="home_addr" id="home_addr">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="home_addr" id="home_addr_y"
+                                        value="ตามบัตรประชาชน">
+                                    ตามบัตรประชาชน
+                                    <br />
+                                    <input type="radio" class="form-check-input" name="home_addr" id="home_addr_n"
+                                        value="ไม่ตรงตามบัตรประชาชน">
+                                    ไม่ตรงตามบัตรประชาชน
+
                                 </div>
-                                <div class="form-inline">
-                                    <div class="row">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>บ้านเลขที่</label>
+                                        <input type='text' name='no_addr' id='no_addr' class='form-control'>
 
-                                        <div class="col-xs-4">
-                                            <div class="form-group">
-                                                <label>บ้านเลขที่</label>
-                                                <input type='text' class="form-control" name='no_addr' id='no_addr'>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="form-group">
-                                                <label>หมู่ที่</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="moo_addr" id="moo_addr"
-                                                        class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>หมู่ที่</label>
+                                        <div class="input-group">
+                                            <input type="text" name="moo_addr" id="moo_addr" class="form-control">
 
+                                        </div>
                                     </div>
 
                                 </div>
-
-                                <div class="form-group">
-                                    <label>จังหวัด</label>
-                                    <input type="text" class="form-control" id="province_addr">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label>จังหวัด</label>
+                                            <span id="dada"></span>
+                                            <!-- <span id="province"> -->
+                                            <select class='form-select' name="province_addr" id="provinceHome"
+                                                onChange="ListAmpHome(this.value)">
+                                                <option value="0">- เลือกจังหวัด -</option>
+                                            </select>
+                                            <!-- </span> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label>อำเภอ</label>
+                                            <span id="amphur">
+                                                <select class='form-select' name="amphur_addr" id="amphurHome"
+                                                    onChange="ListTamHome(this.value)">
+                                                    <option value='0'>- เลือกอำเภอ -</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            <label>ตำบล</label>
+                                            <span id="district">
+                                                <select class='form-select' name="tambon_addr" id="tambonHome">
+                                                    <option value='0'>- เลือกตำบล -</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>อำเภอ</label>
-
-                                    <input type="text" class="form-control" id="amphur_addr">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>ตำบล</label>
-
-                                    <input type="text" class="form-control" id="tambon_addr">
-                                </div>
-
                             </div>
 
                             <div class="form-group">
-                                <label class="b">5)อายุ</label>
+                                <label class="b">5)อายุ (ปี)</label>
                                 <div class="input-group">
-                                    <input type="number" name="age" id="age" class="form-control"> ปี
-                                    <input type="number" name="age" id="ageMonth" class="form-control"> เดือน
+                                    <input type="number" name="age" id="age" class="form-control">
                                 </div>
-
+                                <label class="b">อายุ (เดือน)</label>
+                                <div class="input-group">
+                                    <input type="number" name="ageMonth" id="ageMonth" class="form-control">
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">6)สัญชาติ</label>
-                                <input type="text" id="national" class="form-control">
+                                <select name='national' id='national' class='form-control'>
+                                    <option>ไทย</option>
+                                    <option>ต่างด้าว</option>
+                                    <option>อื่นๆ</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">7)ความสามารถในการว่ายน้ำ</label>
-                                <input type="text" id="can_swim" class="form-control">
-
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="can_swim" id="can_swim_y"
+                                        value="Yes">
+                                    ว่ายน้ำเป็น<br>
+                                    <input type="radio" class="form-check-input" name="can_swim" id="can_swim_n"
+                                        value="No">
+                                    ว่ายน้ำไม่เป็น<br>
+                                    <input type="radio" class="form-check-input" name="can_swim" id="can_swim_skill"
+                                        value="Skill">
+                                    มีทักษะการเอาชีวิตรอดในน้ำ <br>
+                                </div>
                             </div>
                             <p class="help-block">มีทักษะการเอาตัวรอดในน้ำ หมายถึง
                                 1)สามารถลอยน้ำตัวเปล่า (ไม่ใช้อุปกรณ์ช่วย)
@@ -307,12 +346,33 @@
 
                             <div class="form-group">
                                 <label class="b">8)ประเภทแหล่งน้ำที่เกิดเหตุ</label>
-                                <input type="text" id="drowning_type" class="form-control">
-
+                                <select class="form-select" name="drowning_type" id="drowning_type">
+                                    <option value="อ่างอาบน้ำ">อ่างอาบน้ำ</option>
+                                    <option value="โอ่งน้ำ">โอ่งน้ำ</option>
+                                    <option value="ถังน้ำ">ถังน้ำ</option>
+                                    <option value="กะละมัง">กะละมัง</option>
+                                    <option value="สระว่ายน้ำยาง">สระว่ายน้ำยาง</option>
+                                    <option value="อ่างเลี้ยงปลา">อ่างเลี้ยงปลา</option>
+                                    <option value="บ่อน้ำโยก">บ่อน้ำโยก</option>
+                                    <option value="แอ่งน้ำขัง">แอ่งน้ำขัง</option>
+                                    <option value="ท่อระบายน้ำ">ท่อระบายน้ำ</option>
+                                    <option value="สระว่ายน้ำ">สระว่ายน้ำ</option>
+                                    <option value="บ่อน้ำ-สระน้ำเพื่อการเกษตร">
+                                        บ่อน้ำ-สระน้ำเพื่อการเกษตร
+                                    </option>
+                                    <option value="คลอง">คลอง</option>
+                                    <option value="แม่น้ำ">แม่น้ำ</option>
+                                    <option value="น้ำตก">น้ำตก</option>
+                                    <option value="เขื่อน">เขื่อน</option>
+                                    <option value="อ่างเก็บน้ำ">อ่างเก็บน้ำ</option>
+                                    <option value="ทะเล">ทะเล</option>
+                                    <option value="ฝายเก็บน้ำ-ฝายชะลอน้ำ">ฝายเก็บน้ำ-ฝายชะลอน้ำ</option>
+                                </select>
 
                                 <label>ระดับความลึก (เมตร)</label>
                                 <div class="input-group">
-                                    <input type="number" id="pool_depth" class="form-control">
+                                    <input type="text" name="pool_depth" id="pool_depth" class="form-control">
+
                                 </div>
                             </div>
 
@@ -321,6 +381,27 @@
                                 <div id="map"></div>
                             </div>
 
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>ละติจูด</label>
+                                        <input type="number" class="form-control" id="location_lat" name="location_lat">
+                                        <!-- step="0.01" -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>ลองติจูด</label>
+                                        <input type="number" class="form-control" id="location_lon" name="location_lon">
+                                        <!-- step="0.01" -->
+                                    </div>
+                                </div>
+                            </div>
+                            <p></p>
+                            <!-- <button type="button" class="btn btn-outline-info" onclick="getLocation()"
+                                disabled>ค้นหาตำแหน่งปัจจุบันของท่าน</button> -->
+                            <p></p>
                             <div class="form-group">
                                 <label class="form-label">ภาพถ่ายแหล่งน้ำ</label>
                                 <br />
@@ -335,26 +416,41 @@
                             </div>
 
 
-                            <div class="form-group">
-                                <label>จังหวัด</label>
-                                <input type="text" id="drowning_province" class="form-control">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label>จังหวัด</label>
+                                        <select class='form-select' id="ddlPro" name="drowning_province"
+                                            onChange="ListAmp(this.value)">
+                                            <option selected value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label>อำเภอ</label>
+                                        <select class='form-select' id="ddlAmp" name="drowning_amphur"
+                                            onChange="ListTam(this.value)"></select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label>ตำบล</label>
+                                        <select class='form-select' id="ddlTam" name="drowning_tambon"></select>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label>อำเภอ</label>
-                                <input type="text" id="drowning_amphur" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label>ตำบล</label>
-                                <input type="text" id="drowning_tambon" class="form-control">
-                            </div>
-
 
                             <div class="form-group">
                                 <label>การจัดการความปลอดภัยในแหล่งน้ำ</label>
                                 <div>
-                                    <input type="text" class="form-control" id="drowning_safty">
+                                    <input type="radio" class="form-check-input" name="drowning_safty"
+                                        id="drowning_safty_n" value="ไม่มี">ไม่มี
+                                    <br>
+                                    <input type="radio" class="form-check-input" name="drowning_safty"
+                                        id="drowning_safty_y" value="มี"> มี
+                                    <input type="text" name="drowning_safty_des" id="drowning_safty_des"
+                                        placeholder="ระบุ" class="form-control" />
 
                                 </div>
                                 <p class="help-block">การจัดการสิ่งแวดล้อม/อุปกรณ์ เช่น รั้ว
@@ -365,13 +461,28 @@
 
                             <div class="form-group">
                                 <label class="b">9)ก่อนเกิดเหตุ(ในช่วงปกติ) ใครเป็นผู้ดูแล</label>
-                                <input type="text" class="form-control" id="before_with">
+                                <select class='form-select' name="before_with" id="before_with">
+                                    <option value="พ่อแม่">พ่อแม่</option>
+                                    <option value="ปู่ย่าตายาย">ปู่ย่าตายาย</option>
+                                    <option value="ญาติ">ญาติ</option>
+                                    <option value="พี่ น้อง">พี่ น้อง</option>
+                                    <option value="เพื่อน">เพื่อน</option>
+                                    <option value="อยู่ลำพังคนเดียว">อยู่ลำพังคนเดียว</option>
+                                    <option value="ไม่ระบุ">ไม่ระบุ</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">10)ขณะเกิดเหตุ(ณ จุดเกิดเหตุ)คนที่จมน้ำอยู่กับใคร</label>
-
-                                <input type="text" class="form-control" id="drowning_with">
+                                <select class='form-select' name="drowning_with" id="drowning_with">
+                                    <option value="พ่อแม่">พ่อแม่</option>
+                                    <option value="ปู่ย่าตายาย">ปู่ย่าตายาย</option>
+                                    <option value="ญาติ">ญาติ</option>
+                                    <option value="พี่ น้อง">พี่ น้อง</option>
+                                    <option value="เพื่อน">เพื่อน</option>
+                                    <option value="อยู่ลำพังคนเดียว">อยู่ลำพังคนเดียว</option>
+                                    <option value="ไม่ระบุ">ไม่ระบุ</option>
+                                </select>
                             </div>
 
                             <div class="row">
@@ -381,7 +492,8 @@
                                     <div class="form-group">
                                         <label class="form-label">จำนวนคนที่เกิดเหตุในเหตุการณ์เดียวกัน (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number">
+                                            <input type="number" class="form-control" name="drowning_number"
+                                                id="drowning_number">
 
                                         </div>
                                     </div>
@@ -390,7 +502,8 @@
                                     <div class="form-group">
                                         <label class="form-label">เสียชีวิต (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number_dead">
+                                            <input type="number" class="form-control" name="drowning_number_dead"
+                                                id="drowning_number_dead">
 
                                         </div>
                                     </div>
@@ -400,7 +513,8 @@
                                     <div class="form-group">
                                         <label class="form-label">จมน้ำแต่ไม่เสียชีวิต (คน)</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" id="drowning_number_alive">
+                                            <input type="number" class="form-control" name="drowning_number_alive"
+                                                id="drowning_number_alive">
 
                                         </div>
                                     </div>
@@ -409,25 +523,76 @@
 
                             <div class="form-group">
                                 <label class="b">12)เหตุจูงใจการเกิดเหตุ</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_why">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why1"
+                                        value="ลื่น">
+                                    ลื่น<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why2"
+                                        value="พลัดตกหกล้ม">
+                                    พลัดตกหกล้ม<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why3"
+                                        value="เล่นน้ำ">
+                                    เล่นน้ำ<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why4"
+                                        value="เก็บของ">
+                                    เก็บของ<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why5"
+                                        value="เดินลงตามสัตว์">
+                                    เดินลงตามสัตว์<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why6"
+                                        value="ตกปลา">
+                                    ตกปลา<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why7"
+                                        value="งมกุ้ง หอย ปลา">
+                                    งมกุ้ง หอย ปลา<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why8"
+                                        value="อยากรู้ความลึกของน้ำ">
+                                    อยากรู้ความลึกของน้ำ<br />
+                                    <input type="radio" class="form-check-input" name="drowning_why" id="drowning_why9"
+                                        value="อื่นๆ">
+                                    อื่นๆ
+                                    <input type="text" name="drowning_why_des" placeholder="ระบุ"
+                                        class="form-control" />
 
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">13)พฤติกรรมเสี่ยงต่อการเกิดเหตุ (ตอบได้มากกว่า 1 ข้อ)</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_risk_alcohol">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_alcohol"
+                                        id="drowning_risk_alcohol" value="เมาสุรา">เมาสุรา<br>
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_addicted"
+                                        id="drowning_risk_addicted" value="ยาเสพติด">ยาเสพติด<br>
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_drug"
+                                        id="drowning_risk_drug" value="ใช้ยา">ใช้ยา<br>
+
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_disability"
+                                        id="drowning_risk_disability" value="ทุพพลภาพ">ทุพพลภาพ<br>
+
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_none"
+                                        id="drowning_risk_none" value="ไม่มี">ไม่มี<br>
+
+
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_disease"
+                                        id="drowning_risk_disease" value="มีโรคประจำตัว">มีโรคประจำตัว<br>
+                                    <input type="text" name="drowning_risk_disease_des" id="drowning_risk_disease_des"
+                                        placeholder="ระบุ" class="form-control" />
+
+                                    <input type="checkbox" class="form-check-input" name="drowning_risk_other"
+                                        id="drowning_risk_other" value="อื่นๆ">อื่นๆ<br>
+                                    <input type="text" name="drowning_risk_other_des" id="drowning_risk_other_des"
+                                        placeholder="ระบุ" class="form-control" />
 
                                 </div>
+
                             </div>
 
                             <div class="form-group">
                                 <label class="b">14)ระยะทางโดยประมาณระหว่างบ้านถึงที่เกิดเหตุ (เมตร)</label>
 
                                 <div class="input-group">
-                                    <input type="text" id="drowning_length" class="form-control">
+                                    <input type="text" class="form-control" name="drowning_length" id="drowning_length">
                                 </div>
                                 <p class="help-block">ไม่ต้องระบุ หากสถานที่เกิดเหตุอยู่ภายในบ้าน
                                 </p>
@@ -435,31 +600,98 @@
 
                             <div class="form-group">
                                 <label class="b">15)การใช้อุปกรณ์ช่วยลอยน้ำขณะเกิดเหตุ</label><br>
-                                <div class="form-group">
-
-                                    <input type="text" class="form-control" id="drowning_accessory_yes">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="drowning_accessory"
+                                        id="drowning_accessory_n" value="ไม่มี">
+                                    ไม่มี<br>
+                                    <input type="radio" class="form-check-input" name="drowning_accessory"
+                                        id="drowning_accessory_y" value="มี">
+                                    มี
+                                    <div style="margin-left: 35px;">
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            id="drowning_accessory_yes1" value="ขวดพลาสติก">
+                                        ขวดพลาสติก<br>
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            id="drowning_accessory_yes2" value="ถังแกลลอน">
+                                        ถังแกลลอน<br>
+                                        <input type="radio" class="form-check-input" name="drowning_accessory_yes"
+                                            id="drowning_accessory_yes3" value="สวมเสื้อชูชีพ เสื้อพยุงตัว">
+                                        สวมเสื้อชูชีพ/เสื้อพยุงตัว
+                                        <input type="text" class="form-control" name="drowning_accessory_yes_des"
+                                            id="drowning_accessory_yes_des" placeholder="ระบุ" />
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">16)หลังเกิดเหตุจมน้ำ</label><br>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_after_dead"><br>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="drowning_after_dead"
+                                        id="drowning_after_dead1" value="เสียชีวิต ณ ที่เกิดเหตุ">เสียชีวิต ณ
+                                    ที่เกิดเหตุ<br>
+
+                                    <input type="radio" class="form-check-input" name="drowning_after_dead"
+                                        id="drowning_after_dead2"
+                                        value="เสียชีวิตขณะนำส่งโรงพยาบาล">เสียชีวิตขณะนำส่งโรงพยาบาล<br>
+
+                                    <input type="radio" class="form-check-input" name="drowning_after_dead"
+                                        id="drowning_after_dead3" value="เสียชีวิต ณ โรงพยาบาล">เสียชีวิต ณ
+                                    โรงพยาบาล<br>
+
+                                    <input type="radio" class="form-check-input" name="drowning_after_dead"
+                                        id="drowning_after_dead4" value="ไม่เสียชีวิต">ไม่เสียชีวิต
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="b">17)ผู้อยู่ในเหตุการณ์
                                     ช่วยเหลือคนจมน้ำขึ้นมาจากน้ำด้วยวิธีการใด</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_helper">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="drowning_helper"
+                                        id="drowning_helper1"
+                                        value="นำศพขึ้นมาจากน้ำเนื่องจากเสียชีวิตแล้ว">นำศพขึ้นมาจากน้ำเนื่องจากเสียชีวิตแล้ว<br>
+                                    <input type="radio" class="form-check-input" name="drowning_helper"
+                                        id="drowning_helper2"
+                                        value="ช่วยด้วยการกระโดดลงไปช่วย">ช่วยด้วยการกระโดดลงไปช่วย<br>
+                                    <input type="radio" class="form-check-input" name="drowning_helper"
+                                        id="drowning_helper3"
+                                        value="ช่วยด้วยการหาอุปกรณ์โยนให้จับ">ช่วยด้วยการหาอุปกรณ์โยนให้จับ<br>
+                                    <input type="text" placeholder="ระบุอุปกรณ์" class="form-control"
+                                        name="drowning_helper_drop_des" id="drowning_helper_drop_des" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">18)ภายหลังจากนำคนจมน้ำขึ้นมาจากน้ำ </label>
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_recue_yes">
+                                <div class="form-check">
+
+                                    <input type="radio" class="form-check-input" name="drowning_recue_water"
+                                        id="drowning_recue_water1" value="ไม่ได้ปฐมพยาบาลเพราะ">
+                                    ไม่ได้ปฐมพยาบาลเพราะ<br>
+                                    <input type="text" placeholder="" class="form-control" name="drowning_recue_no_des"
+                                        id="drowning_recue_no_des" />
+                                    <p></p>
+                                    <input type="radio" class="form-check-input" name="drowning_recue_water"
+                                        id="drowning_recue_water2" value="ทำการปฐมพยาบาล">
+                                    ทำการปฐมพยาบาลโดย<br>
+                                    <div style="margin-left: 35px;">
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            id="drowning_recue_yes1" value="CPR+เป่าปาก">
+                                        CPR+เป่าปาก<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            id="drowning_recue_yes2" value="CPR">
+                                        CPR<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            id="drowning_recue_yes3" value="แบกบ่า">
+                                        แบกบ่า<br>
+                                        <input type="radio" class="form-check-input" name="drowning_recue_yes"
+                                            id="drowning_recue_yes4" value="กดท้อง">
+                                        กดท้อง<br>
+
+                                        <input type="text" placeholder="ผู้ปฐมพยาบาล (ระบุ)" class="form-control"
+                                            id="drowning_rescue_yes_des" name="drowning_rescue_yes_des" />
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -467,8 +699,16 @@
                                 <label class="b">19)ภายหลังการปฐมพยาบาล ได้นำส่งสถานบริการสาธารณสุข โดยใคร
                                     ที่ใด</label>
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="drowning_refer">
+                                <div class="form-check">
+
+                                    <input type="radio" class="form-check-input" name="drowning_refer"
+                                        id="drowning_refer1" value="ไม่ได้นำส่งสถานบริการสาธารณสุข">
+                                    ไม่ได้นำส่งสถานบริการสาธารณสุข<br>
+                                    <input type="radio" class="form-check-input" name="drowning_refer"
+                                        id="drowning_refer2" value="นำส่งสถานบริการสาธารณสุข">
+                                    นำส่งสถานบริการสาธารณสุข<br>
+                                    <input type="text" placeholder="ระบุชื่อ" class="form-control"
+                                        name="drowning_refer_hosp" id="drowning_refer_hosp" />
                                 </div>
 
                             </div>
@@ -484,8 +724,14 @@
                             <div class="form-group">
                                 <label class="b">21)<u>หลังเกิดเหตุการณ์</u>
                                     มีการจัดแหล่งน้ำที่เกิดเหตุเพื่อป้องกันการจมน้ำ</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="defend_drowning">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="defend_drowning"
+                                        id="defend_drowning1" value="ไม่มี">ไม่มี<br>
+                                    <input type="radio" class="form-check-input" name="defend_drowning"
+                                        id="defend_drowning2" value="มี">
+                                    มี<br>
+                                    <input type="text" placeholder="ระบุ" class="form-control"
+                                        name="defend_drowning_des" id="defend_drowning_des" />
 
                                 </div>
                                 <p class="help-block">การจัดการแหล่งน้ำที่เกิดเหตุ เช่น สร้างรั้ว
@@ -505,48 +751,59 @@
                             ข. ผู้รายงาน
                         </div>
                         <div class="card-body">
-                            <div class="form-group ">
-                                <label class="form-label">1)
+                            <div class="form-group row">
+                                <label class="">1)
                                     ชื่อ-สกุลผู้รายงาน</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_name" class="form-control">
+                                <div class="">
+                                    <input type="text" name="report_name" id="report_name" class="form-control">
                                 </div>
 
-                                <label class="form-label">ตำแหน่ง</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_job" class="form-control">
+                                <label class="">ตำแหน่ง</label>
+                                <div class="">
+                                    <input type="text" name="report_job" id="report_job" class="form-control">
                                 </div>
 
                                 <label class="">2)
                                     หน่วยงาน</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_office" class="form-control">
+                                <div class="">
+                                    <input type="text" name="report_office" id="report_office" class="form-control">
                                 </div>
 
-                                <label class="form-label">จังหวัด</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_province" class="form-control">
+                                <label class="">จังหวัด</label>
+                                <div class="">
+                                    <select class='form-select' name="report_province" id="repPro">
+                                        <option selected value=""></option>
+
+                                    </select>
                                 </div>
 
-                                <label class="form-label">3)
+                                <label class="">3)
                                     เบอร์โทร</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_tel" class="form-control">
+                                <div class="">
+                                    <input type="text" name="report_tel" id="report_tel" class="form-control">
                                 </div>
 
-                                <label class="form-label">โทรสาร</label>
-                                <div class="form-group">
-                                    <input type="text" id="report_fax" class="form-control">
+                                <label class="">โทรสาร</label>
+                                <div class="">
+                                    <input type="text" name="report_fax" id="report_fax" class="form-control">
                                 </div>
 
-                                <label class="form-label">4)
+                                <label class="">4)
                                     วันที่รายงาน</label>
                                 <div class="">
-                                    <div class="formgroup">
-                                        <input type="date" id="report_date" class="form-control">
-
+                                    <div class="input-group bootstrap-timepicker timepicker">
+                                        <input type="date" name="report_date" id="report_date"
+                                            class="form-control input-small">
+                                        <span class="input-group-addon"><i
+                                                class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
                                 </div>
+
+                                <label class="">** ปีของข้อมูลที่เอามาคีย์(ปี ค.ศ.)</label>
+                                <div class="">
+                                    <input type="text" name="s_year" id="s_year" class="form-control" required>
+                                </div>
+
                             </div>
 
                         </div>
@@ -554,8 +811,7 @@
                     </div>
                     <hr>
                     <!-- <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button> -->
-                    <!-- <button type="submit" class="btn btn-success"><i
-                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp; -->
+
                     <a href="./_report_invest.html" class="btn btn-outline-info"><i
                             class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานสอบสวน</a>
 
@@ -570,9 +826,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
-
 
     <script type="text/javascript">
         let drowning_id = sessionStorage.getItem('drowning_id');
@@ -594,8 +847,7 @@
             location.href = "./_form_login.html";
         }
 
-        let searchParams = new URLSearchParams(window.location.search)
-        let id = searchParams.get('id')
+        var geoserver = "http://103.40.148.140:8081"
 
         let latlng = {
             lat: 16.849504,
@@ -629,30 +881,26 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const pro = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
             layers: 'th:province_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const amp = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
             layers: 'th:amphoe_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
 
-        const tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        const tam = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
             layers: 'th:tamon_4326',
             format: 'image/png',
             transparent: true,
             CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
         });
-
-        let fs_dead = L.featureGroup()
-        let fs_risk = L.featureGroup()
-        let fs_ratio = L.featureGroup()
 
         var baseMap = {
             "Mapbox": mapbox,
@@ -665,37 +913,208 @@
             "ขอบเขตจังหวัด": pro.addTo(map),
             "ขอบเขตอำเภอ": amp,
             "ขอบเขตตำบล": tam,
-            "<img src='./img/red.png' width='25px'>จุดเสี่ยง": fs_risk.addTo(map),
-            "จุดอันตราย<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./img/black.png' width='25px'>: เสียชีวิต<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./img/green.png' width='25px'>: รอดชีวิต": fs_dead.addTo(map),
-            "อัตราตาย<br/>&nbsp;&nbsp;&nbsp;<img src='./img/legend.png' width='200px'>": fs_ratio.addTo(map)
         }
 
         L.control.layers(baseMap, overlayMap).addTo(map);
 
-        var redMarker = L.AwesomeMarkers.icon({
-            icon: 'exclamation-triangle',
-            markerColor: 'red',
-            prefix: 'fa'
-        });
-
-        var greenMarker = L.AwesomeMarkers.icon({
-            icon: 'heart',
-            markerColor: 'green',
-            prefix: 'fa'
-        });
-
-        var blackMarker = L.AwesomeMarkers.icon({
-            icon: 'window-close',
-            markerColor: 'black',
-            prefix: 'fa',
-            spin: false
-        });
 
 
-        $.post("./service/invest_select.php", { id: id }).done(r => {
+        function ListPro() {
+            $.get("./service/api.php?type=pro").done(r => {
+                const datArr = JSON.parse(r)
+                datArr.data.map(i => $("#ddlPro").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function ListAmp(code) {
+            $.get("./service/api.php?type=amp&code=" + code).done(r => {
+                const datArr = JSON.parse(r)
+                $("#ddlAmp").empty()
+                $("#ddlAmp").append(`<option value=""></option>`)
+                datArr.data.map(i => $("#ddlAmp").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function ListTam(code) {
+            // console.log(code)
+            $.get("./service/api.php?type=tam&code=" + code).done(r => {
+                const datArr = JSON.parse(r)
+                $("#ddlTam").empty()
+                $("#ddlTam").append(`<option value=""></option>`)
+                datArr.data.map(i => $("#ddlTam").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function ListProHome() {
+            $.get("./service/api.php?type=pro").done(r => {
+                const datArr = JSON.parse(r)
+                datArr.data.map(i => $("#provinceHome").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function ListAmpHome(code) {
+            $.get("./service/api.php?type=amp&code=" + code).done(r => {
+                const datArr = JSON.parse(r)
+                $("#amphurHome").empty()
+                $("#amphurHome").append(`<option value=""></option>`)
+                datArr.data.map(i => $("#amphurHome").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function ListTamHome(code) {
+            // console.log(code)
+            $.get("./service/api.php?type=tam&code=" + code).done(r => {
+                const datArr = JSON.parse(r)
+                $("#tambonHome").empty()
+                $("#tambonHome").append(`<option value=""></option>`)
+                datArr.data.map(i => $("#tambonHome").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function RePro() {
+            $.get("./service/api.php?type=pro").done(r => {
+                const datArr = JSON.parse(r)
+                datArr.data.map(i => $("#repPro").append(`<option value="${i.code}">${i.name}</option>`))
+            })
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            $("#location_lat").val(position.coords.latitude)
+            $("#location_lon").val(position.coords.longitude)
+        }
+
+        ListPro()
+        ListProHome()
+        RePro()
+
+
+        // <!------------------------ยกเลิก radio------------------------------>
+        var allRadios = document.getElementsByName('home_addr');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        var allRadios = document.getElementsByName('txtAddr');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        var allRadios = document.getElementsByName('drowning_accessory');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        var allRadios = document.getElementsByName('drowning_accessory_yes');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        var allRadios = document.getElementsByName('ไม่มี');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        var allRadios = document.getElementsByName('มี');
+        var booRadio;
+        var x = 0;
+        for (x = 0; x < allRadios.length; x++) {
+
+            allRadios[x].onclick = function () {
+                if (booRadio == this) {
+                    this.checked = false;
+                    booRadio = null;
+                } else {
+                    booRadio = this;
+                }
+            };
+        }
+
+        /////
+        let searchParams = new URLSearchParams(window.location.search)
+        let id = searchParams.get('id')
+        $('#id').val(id);
+        $.post("./service/invest_select.php", { id: id }).done(async r => {
             const data = JSON.parse(r)
+            ListAmpHome(data.data[0].province_addr)
+            ListAmp(data.data[0].drowning_province)
 
-            data.data.map(i => {
+
+            setTimeout(() => {
+                ListTamHome(data.data[0].amphur_addr)
+                ListTam(data.data[0].drowning_amphur)
+                $('#repPro').val(data.data[0].report_province);
+            }, 500);
+
+            setTimeout(() => {
+                $('#provinceHome').val(data.data[0].province_addr);
+                $('#amphurHome').val(data.data[0].amphur_addr);
+                $('#tambonHome').val(data.data[0].tambon_addr);
+
+                $('#ddlPro').val(data.data[0].drowning_province);
+                $('#ddlAmp').val(data.data[0].drowning_amphur);
+                $('#ddlTam').val(data.data[0].drowning_tambon);
+                $('#repPro').val(data.data[0].report_province);
+            }, 1000);
+
+            data.data.map(async i => {
                 console.log(i)
                 $('#cid').val(i.cid);
                 $('#icd_code').val(i.icd_code);
@@ -706,120 +1125,111 @@
                 $('#fname').val(i.fname);
                 $('#lname').val(i.lname);
                 $('#sex').val(i.sex);
-                $('#home_addr').val(i.home_addr);
+                i.home_addr == "ไม่ตรงตามบัตรประชาชน" ? $('#home_addr_n').prop("checked", true) : $('#home_addr_y').prop("checked", true);
                 $('#no_addr').val(i.no_addr);
                 $('#moo_addr').val(i.moo_addr);
-                $('#province_addr').val(i.changwatname);
-                $('#amphur_addr').val(i.ampurname);
-                $('#tambon_addr').val(i.tambonname);
+
                 $('#age').val(i.age);
                 $('#ageMonth').val(i.ageMonth);
                 $('#national').val(i.national);
-                $('#can_swim').val(i.can_swim);
+                // $('#can_swim').val(i.can_swim);
+                i.can_swim == "Yes" ? $('#can_swi_y').prop("checked", true) : i.can_swim == "No" ? $('#can_swi_n').prop("checked", true) : $('#can_swim_skill').prop("checked", true);
                 $('#drowning_type').val(i.drowning_type);
                 $('#pool_depth').val(i.pool_depth);
 
                 // $("#picture").attr("src", i.picture);
                 // $('#picture').val(i.picture);
                 $('#drowning_location').val(i.drowning_location);
-                $('#drowning_province').val(i.changwatname);
-                $('#drowning_amphur').val(i.ampurname);
-                $('#drowning_tambon').val(i.tambonname);
-                $('#drowning_safty').val(i.drowning_safty);
+                i.picture !== null ? $("#picture").attr("src", i.picture) : null;
+                // $('#drowning_province').val(i.changwatname);
+                // $('#drowning_amphur').val(i.ampurname);
+                // $('#drowning_tambon').val(i.tambonname);
+                i.drowning_safty == "มี" ? $('#drowning_safty_y').prop("checked", true) : $('#drowning_safty_n').prop("checked", true);
                 $('#drowning_safty_des').val(i.drowning_safty_des);
                 $('#before_with').val(i.before_with);
                 $('#drowning_with').val(i.drowning_with);
                 $('#drowning_number').val(i.drowning_number);
                 $('#drowning_number_dead').val(i.drowning_number_dead);
                 $('#drowning_number_alive').val(i.drowning_number_alive);
-                $('#drowning_why').val(i.drowning_why);
+                if (i.drowning_why == "ลื่น") {
+                    $('#drowning_why1').prop("checked", true)
+                } else if (i.drowning_why == "พลัดตกหกล้ม") {
+                    $('#drowning_why2').prop("checked", true)
+                } else if (i.drowning_why == "เล่นน้ำ") {
+                    $('#drowning_why3').prop("checked", true)
+                } else if (i.drowning_why == "เก็บของ") {
+                    $('#drowning_why4').prop("checked", true)
+                } else if (i.drowning_why == "เดินลงตามสัตว์") {
+                    $('#drowning_why5').prop("checked", true)
+                } else if (i.drowning_why == "ตกปลา") {
+                    $('#drowning_why6').prop("checked", true)
+                } else if (i.drowning_why == "งมกุ้ง หอย ปลา") {
+                    $('#drowning_why7').prop("checked", true)
+                } else if (i.drowning_why == "อยากรู้ความลึกของน้ำ") {
+                    $('#drowning_why8').prop("checked", true)
+                } else {
+                    $('#drowning_why9').prop("checked", true)
+                }
                 $('#drowning_why_des').val(i.drowning_why_des);
-                $('#drowning_risk_alcohol').val(i.drowning_risk_alcohol);
-                $('#drowning_risk_addicted').val(i.drowning_risk_addicted);
-                $('#drowning_risk_drug').val(i.drowning_risk_drug);
-                $('#drowning_risk_disability').val(i.drowning_risk_disability);
-                $('#drowning_risk_none').val(i.drowning_risk_none);
-                $('#drowning_risk_disease').val(i.drowning_risk_disease);
+                i.drowning_risk_alcohol !== null ? $('#drowning_risk_alcohol').prop("checked", true) : $('#drowning_risk_alcohol').prop("checked", false)
+                i.drowning_risk_addicted !== null ? $('#drowning_risk_addicted').prop("checked", true) : $('#drowning_risk_addicted').prop("checked", false)
+                i.drowning_risk_drug !== null ? $('#drowning_risk_drug').prop("checked", true) : $('#drowning_risk_drug').prop("checked", false)
+                i.drowning_risk_disability !== null ? $('#drowning_risk_disability').prop("checked", true) : $('#drowning_risk_disability').prop("checked", false)
+                i.drowning_risk_none !== null ? $('#drowning_risk_none').prop("checked", true) : $('#drowning_risk_none').prop("checked", false)
+                i.drowning_risk_disease !== null ? $('#drowning_risk_disease').prop("checked", true) : $('#drowning_risk_disease').prop("checked", false)
                 $('#drowning_risk_disease_des').val(i.drowning_risk_disease_des);
-                $('#drowning_risk_other').val(i.drowning_risk_other);
+                i.drowning_risk_other !== null ? $('#drowning_risk_other').prop("drowning_risk_other", true) : $('#drowning_risk_addicted').prop("checked", false)
                 $('#drowning_risk_other_des').val(i.drowning_risk_other_des);
+
                 $('#drowning_length').val(i.drowning_length);
                 $('#drowning_accessory').val(i.drowning_accessory);
-                $('#drowning_accessory_yes').val(i.drowning_accessory_yes);
+                i.drowning_accessory == "มี" ? $('#drowning_accessory_y').prop("checked", true) : $('#drowning_accessory_n').prop("checked", true);
+                i.drowning_accessory_yes == "ขวดพลาสติก" ? $('#drowning_accessory_yes1').prop("checked", true) : null;
+                i.drowning_accessory_yes == "ถังแกลลอน" ? $('#drowning_accessory_yes2').prop("checked", true) : null;
+                i.drowning_accessory_yes == "สวมเสื้อชูชีพ เสื้อพยุงตัว" ? $('#drowning_accessory_yes3').prop("checked", true) : null;
                 $('#drowning_accessory_yes_des').val(i.drowning_accessory_yes_des);
-                $('#drowning_after_dead').val(i.drowning_after_dead);
-                $('#drowning_helper').val(i.drowning_helper);
+
+                i.drowning_after_dead == "เสียชีวิต ณ ที่เกิดเหตุ" ? $('#drowning_after_dead1').prop("checked", true) : null;
+                i.drowning_after_dead == "เสียชีวิตขณะนำส่งโรงพยาบาล" ? $('#drowning_after_dead2').prop("checked", true) : null;
+                i.drowning_after_dead == "เสียชีวิต ณ โรงพยาบาล" ? $('#drowning_after_dead3').prop("checked", true) : null;
+                i.drowning_after_dead == "ไม่เสียชีวิต" ? $('#drowning_after_dead4').prop("checked", true) : null;
+
+                i.drowning_helper == "นำศพขึ้นมาจากน้ำเนื่องจากเสียชีวิตแล้ว" ? $('#drowning_helper1').prop("checked", true) : null;
+                i.drowning_helper == "ช่วยด้วยการกระโดดลงไปช่วย" ? $('#drowning_helper2').prop("checked", true) : null;
+                i.drowning_helper == "ช่วยด้วยการหาอุปกรณ์โยนให้จับ" ? $('#drowning_helper3').prop("checked", true) : null;
                 $('#drowning_helper_drop_des').val(i.drowning_helper_drop_des);
-                $('#drowning_rescue_water').val(i.drowning_rescue_water);
+
+                i.drowning_rescue_water == "ไม่ได้ปฐมพยาบาลเพราะ" ? $('#drowning_rescue_water1').prop("checked", true) : $('#drowning_rescue_water2').prop("checked", true);
                 $('#drowning_recue_no_des').val(i.drowning_recue_no_des);
-                $('#drowning_recue_yes').val(i.drowning_recue_yes);
+
+                i.drowning_recue_yes == "CPR+เป่าปาก" ? $('#drowning_recue_yes1').prop("checked", true) : null;
+                i.drowning_recue_yes == "CPR" ? $('#drowning_recue_yes2').prop("checked", true) : null;
+                i.drowning_recue_yes == "แบกบ่า" ? $('#drowning_recue_yes3').prop("checked", true) : null;
+                i.drowning_recue_yes == "กดท้อง" ? $('#drowning_recue_yes4').prop("checked", true) : null;
                 $('#drowning_rescue_yes_des').val(i.drowning_rescue_yes_des);
-                $('#drowning_refer').val(i.drowning_refer);
+
+                i.drowning_refer == "ไม่ได้นำส่งสถานบริการสาธารณสุข" ? $('#drowning_refer1').prop("checked", true) : $('#drowning_refer2').prop("checked", true);
                 $('#drowning_refer_hosp').val(i.drowning_refer_hosp);
                 $('#drowning_des').val(i.drowning_des);
-                $('#defend_drowning').val(i.defend_drowning);
+                i.defend_drowning == "ไม่มี" ? $('#defend_drowning1').prop("checked", true) : $('#defend_drowning2').prop("checked", true);
                 $('#defend_drowning_des').val(i.defend_drowning_des);
+
                 $('#report_name').val(i.report_name);
                 $('#report_job').val(i.report_job);
                 $('#report_office').val(i.report_office);
-                $('#report_province').val(i.report_province);
                 $('#report_tel').val(i.report_tel);
                 $('#report_fax').val(i.report_fax);
                 $('#report_date').val(i.report_date);
+                $('#s_year').val(i.s_year);
+                if (i.location_lat !== null) {
+                    L.marker([i.location_lat, i.location_lon]).addTo(map)
+                }
 
                 $('#location_lat').val(i.location_lat);
                 $('#location_lon').val(i.location_lon);
-
-                if (Number(i.lat) > 100) {
-                    $.get("https://rti2dss.com:3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
-                        // console.log(r.data[0])
-                        let latlon = [Number(r.data[0].lat), Number(r.data[0].lon)]
-                        map.setView(latlon, 13);
-
-                        if (i.drowning_after_dead == "ไม่เสียชีวิต") {
-                            fs_dead.addLayer(
-                                L.marker(latlon, { icon: greenMarker, name: "marker" }).bindPopup(
-                                    `<b>วันที่เกิดเหตุ: </b>  ${i.drowning_date} <br/>
-                                        เพศ  ${i.sex} อายุ  ${i.age} ปี<br/>
-                                        <img src="./${i.picture}" width="300px"><br/>
-                                        พื้นที่ ต. ${i.tambonname} อ. ${i.ampurname} จ. ${i.changwatname}`)
-                            )
-                        } else {
-                            fs_dead.addLayer(
-                                L.marker(latlon, { icon: blackMarker, name: "marker" }).bindPopup(
-                                    `<b>วันที่เกิดเหตุ: </b>  ${i.drowning_date} <br/>
-                                        เพศ  ${i.sex} อายุ  ${i.age} ปี<br/>
-                                        <img src="./${i.picture}" width="300px"><br/>
-                                        พื้นที่ ต. ${i.tambonname} อ. ${i.ampurname} จ. ${i.changwatname}`)
-                            )
-                        }
-                    })
-                } else {
-                    let latlon = [Number(i.location_lat), Number(i.location_lon)]
-                    map.setView(latlon, 13);
-                    if (i.drowning_after_dead == "ไม่เสียชีวิต") {
-                        fs_dead.addLayer(
-                            L.marker(latlon, { icon: greenMarker, name: "marker" }).bindPopup(
-                                `<b>วันที่เกิดเหตุ: </b>  ${i.drowning_date} <br/>
-                                        เพศ  ${i.sex} อายุ  ${i.age} ปี<br/>
-                                        <img src="./${i.picture}" width="300px"><br/>
-                                        พื้นที่ ต. ${i.tambonname} อ. ${i.ampurname} จ. ${i.changwatname}`)
-                        )
-                    } else {
-                        fs_dead.addLayer(
-                            L.marker(latlon, { icon: blackMarker, name: "marker" }).bindPopup(
-                                `<b>วันที่เกิดเหตุ: </b>  ${i.drowning_date} <br/>
-                                        เพศ  ${i.sex} อายุ  ${i.age} ปี<br/>
-                                        <img src="./${i.picture}" width="300px"><br/>
-                                        พื้นที่ ต. ${i.tambonname} อ. ${i.ampurname} จ. ${i.changwatname}`)
-                        )
-                    }
-                }
             })
 
         })
-
-
     </script>
 </body>
 

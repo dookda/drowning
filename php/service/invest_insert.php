@@ -31,7 +31,7 @@
 		// send notify
 		$url = "https://rti2dss.com/p3000/api/pushmsg";
 		$data = array(
-			'userId'=>'U176de9c656286feb470b121c184e1356'
+			'userId'=>'insert'
 		);
 		$ch = curl_init($url);
 		$jsonDataEncoded = json_encode($data);

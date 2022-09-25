@@ -237,34 +237,28 @@
 
                             <div class="form-group">
                                 <label class="b">4)ที่พักอาศัยคนจมน้ำ</label>
-                                <div>
-                                    <input type="radio" name="home_addr" value="ตามบัตรประชาชน">
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="home_addr"
+                                        value="ตามบัตรประชาชน">
                                     ตามบัตรประชาชน
+                                    <br />
+                                    <input type="radio" class="form-check-input" name="home_addr"
+                                        value="ไม่ตรงตามบัตรประชาชน">
+                                    ไม่ตรงตามบัตรประชาชน
+
                                 </div>
-                                <div class="form-inline">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <input type="radio" name="home_addr" value="ไม่ตรงตามบัตรประชาชน">
-                                            ไม่ตรงตามบัตรประชาชน
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>บ้านเลขที่</label>
+                                        <input type='text' name='no_addr' class='form-control'>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>หมู่ที่</label>
+                                        <div class="input-group">
+                                            <input type="text" name="moo_addr" class="form-controly">
+
                                         </div>
-
-                                        <div class="col-xs-4">
-                                            <div class="form-group">
-                                                <label>บ้านเลขที่</label>
-                                                <input type='text' name='no_addr' class='form-control'>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="form-group">
-                                                <label>หมู่ที่</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="moo_addr" class="form-control">
-
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
 
                                 </div>
@@ -328,11 +322,14 @@
                             <div class="form-group">
                                 <label class="b">7)ความสามารถในการว่ายน้ำ</label>
                                 <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="can_swim" value="Yes">
+                                    <input type="radio" class="form-check-input" name="can_swim" name="can_swi_y"
+                                        value="Yes">
                                     ว่ายน้ำเป็น<br>
-                                    <input type="radio" class="form-check-input" name="can_swim" value="No">
+                                    <input type="radio" class="form-check-input" name="can_swim" name="can_swim_n"
+                                        value="No">
                                     ว่ายน้ำไม่เป็น<br>
-                                    <input type="radio" class="form-check-input" name="can_swim" value="Skill">
+                                    <input type="radio" class="form-check-input" name="can_swim" name="can_swim_skill"
+                                        value="Skill">
                                     มีทักษะการเอาชีวิตรอดในน้ำ <br>
                                 </div>
                             </div>
@@ -393,7 +390,7 @@
                             </div>
                             <p></p>
                             <button type="button" class="btn btn-outline-info"
-                                onclick="getLocation()">ค้นหาตำแหน่ง</button>
+                                onclick="getLocation()">ค้นหาตำแหน่งปัจจุบันของท่าน</button>
                             <p></p>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">ภาพถ่ายแหล่งน้ำ</label>
@@ -438,12 +435,11 @@
                             <div class="form-group">
                                 <label>การจัดการความปลอดภัยในแหล่งน้ำ</label>
                                 <div>
-                                    <input type="radio" name="drowning_safty" value="ไม่มี">ไม่มี
+                                    <input type="radio" class="form-check-input" name="drowning_safty"
+                                        value="ไม่มี">ไม่มี
+                                    <br>
 
-                                </div>
-                                <div class="form-inline">
-
-                                    <input type="radio" name="drowning_safty" value="มี"> มี
+                                    <input type="radio" class="form-check-input" name="drowning_safty" value="มี"> มี
                                     <input type="text" name="drowning_safty_des" placeholder="ระบุ"
                                         class="form-control" />
 
@@ -457,26 +453,26 @@
                             <div class="form-group">
                                 <label class="b">9)ก่อนเกิดเหตุ(ในช่วงปกติ) ใครเป็นผู้ดูแล</label>
                                 <select class='form-select' name="before_with">
-                                    <option>พ่อแม่</option>
-                                    <option>ปู่ย่าตายาย</option>
-                                    <option>ญาติ</option>
-                                    <option>พี่ น้อง</option>
-                                    <option>เพื่อน</option>
-                                    <option>อยู่ลำพังคนเดียว</option>
-                                    <option>ไม่ระบุ</option>
+                                    <option value="พ่อแม่">พ่อแม่</option>
+                                    <option value="ปู่ย่าตายาย">ปู่ย่าตายาย</option>
+                                    <option value="ญาติ">ญาติ</option>
+                                    <option value="พี่ น้อง">พี่ น้อง</option>
+                                    <option value="เพื่อน">เพื่อน</option>
+                                    <option value="อยู่ลำพังคนเดียว">อยู่ลำพังคนเดียว</option>
+                                    <option value="ไม่ระบุ">ไม่ระบุ</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="b">10)ขณะเกิดเหตุ(ณ จุดเกิดเหตุ)คนที่จมน้ำอยู่กับใคร</label>
                                 <select class='form-select' name="drowning_with">
-                                    <option>พ่อแม่</option>
-                                    <option>ปู่ย่าตายาย</option>
-                                    <option>ญาติ</option>
-                                    <option>พี่ น้อง</option>
-                                    <option>เพื่อน</option>
-                                    <option>อยู่ลำพังคนเดียว</option>
-                                    <option>ไม่ระบุ</option>
+                                    <option value="พ่อแม่">พ่อแม่</option>
+                                    <option value="ปู่ย่าตายาย">ปู่ย่าตายาย</option>
+                                    <option value="ญาติ">ญาติ</option>
+                                    <option value="พี่ น้อง">พี่ น้อง</option>
+                                    <option value="เพื่อน">เพื่อน</option>
+                                    <option value="อยู่ลำพังคนเดียว">อยู่ลำพังคนเดียว</option>
+                                    <option value="ไม่ระบุ">ไม่ระบุ</option>
                                 </select>
                             </div>
 
@@ -582,7 +578,7 @@
                                 <label class="b">14)ระยะทางโดยประมาณระหว่างบ้านถึงที่เกิดเหตุ (เมตร)</label>
 
                                 <div class="input-group">
-                                    <input name="drowning_length" class="form-control">
+                                    <input type="text" class="form-control" name="drowning_length">
                                 </div>
                                 <p class="help-block">ไม่ต้องระบุ หากสถานที่เกิดเหตุอยู่ภายในบ้าน
                                 </p>
@@ -621,9 +617,8 @@
                                     <input type="radio" class="form-check-input" name="drowning_after_dead"
                                         value="เสียชีวิตขณะนำส่งโรงพยาบาล">เสียชีวิตขณะนำส่งโรงพยาบาล<br>
 
-                                    <input type="radio" class="form-check-input" name="drowning_after_dead" value="เสียชีวิต
-                                        ณ โรงพยาบาล">เสียชีวิต
-                                    ณ โรงพยาบาล<br>
+                                    <input type="radio" class="form-check-input" name="drowning_after_dead"
+                                        value="เสียชีวิต ณ โรงพยาบาล">เสียชีวิต ณ โรงพยาบาล<br>
 
                                     <input type="radio" class="form-check-input" name="drowning_after_dead"
                                         value="ไม่เสียชีวิต">ไม่เสียชีวิต
