@@ -186,6 +186,15 @@
                                         <input type="date" id="approv_date" class="form-control" name="approv_date"
                                             required>
                                     </div>
+                                    <hr>
+                                    <button type="submit" class="btn btn-success"><i
+                                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
+
+                                    <a class="btn btn-outline-success" onclick="addMember()"><i
+                                            class="bi bi-person-plus-fill"></i>&nbsp;เพิ่มสมาชิก</a>&nbsp;
+
+                                    <a href="./_report_team.html" class="btn btn-outline-info"><i
+                                            class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานทีมผู้ก่อการดี</a>
                                 </form>
 
                             </div>
@@ -204,12 +213,6 @@
                                 <th>โทรศัพท์</th>
                             </tr>
                         </table>
-
-                        <hr>
-
-
-                        <a href="./_report_team.html" class="btn btn-outline-info"><i
-                                class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานทีมผู้ก่อการดี</a>
                     </div>
                 </div>
             </div>
@@ -239,7 +242,7 @@
             $("#logout").show()
         } else {
             $("#login").show()
-            // location.href = "./_form_login.html";
+            location.href = "./_form_login.html";
         }
 
         let searchParams = new URLSearchParams(window.location.search)

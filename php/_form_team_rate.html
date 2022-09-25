@@ -917,16 +917,15 @@
 
                                     <div class="card">
                                         <div class="card-body">
-                                            ผลประเมินตนเอง <h1><span class="badge bg-warning text-dark"
-                                                    id="rate_txt"></span></h1>
+                                            ผลประเมินตนเอง <span id="rate_txt"></span>
                                             (<span id="rate_num"></span>)
                                             คะแนน
                                         </div>
                                     </div>
 
-                                    <hr>
+                                    <!-- <hr>
                                     <button type="submit" class="btn btn-success"><i
-                                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
+                                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp; -->
                                     <!-- <a href="./_report_team.html" class="btn btn-outline-info"><i
                                             class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานทีมผู้ก่อการดี</a> -->
                                 </form>
@@ -997,11 +996,11 @@
                 }
             }
 
-            if (rate > 85) {
-                document.getElementById("rate_txt").innerHTML = "ผ่าน"
+            if (rate >= 85) {
+                document.getElementById("rate_txt").innerHTML = `<h1><span class="badge bg-success text-white">ผ่าน</span></h1>`
                 document.getElementById("rate_num").innerHTML = rate
             } else {
-                document.getElementById("rate_txt").innerHTML = "ไม่ผ่าน"
+                document.getElementById("rate_txt").innerHTML = `<h1><span class="badge bg-warning text-dark">ไม่ผ่าน</span></h1>`
                 document.getElementById("rate_num").innerHTML = rate
             }
             console.log(rate);

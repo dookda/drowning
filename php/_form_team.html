@@ -215,13 +215,14 @@
         $("#logout").hide()
         $("#login").hide()
         // console.log(uid, org);
-        if (drowning_id && drowning_username == "admin") {
-            $("#auth").html(`<i class="bi bi-person-square"></i>&nbsp;${drowning_username}`)
+        if (drowning_id && drowning_username) {
+            $("#auth").html(`${drowning_username}`)
             $("#logout").show()
         } else {
             $("#login").show()
-            // location.href = "./_form_login.html";
+            location.href = "./_form_login.html";
         }
+
 
         function ListPro() {
             $.get("./service/api.php?type=pro").done(r => {

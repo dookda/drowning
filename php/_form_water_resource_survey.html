@@ -200,18 +200,18 @@
                                             <option value="แม่น้ำ">แม่น้ำ</option>
                                             <option value="ลำคลอง-ลำห้วย">ลำคลอง/ลำห้วย</option>
                                             <option value="อ่างเก็บน้ำ-ฝายเก็บน้ำ">
-                                                อ่างเก็บน้ำ/ฝายเก็บน้ำ
+                                                อ่างเก็บน้ำ-ฝายเก็บน้ำ
                                             </option>
                                             <option value="เขื่อน">เขื่อน</option>
-                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ/สระน้ำเกษตร
+                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ-สระน้ำเกษตร
                                             </option>
                                             <option value="คลองชลประทาน">คลองชลประทาน </option>
                                             <option value="ภาชนะเก็บน้ำ-อ่างอาบน้ำ">
-                                                ภาชนะเก็บน้ำ/อ่างอาบน้ำ
+                                                ภาชนะเก็บน้ำ-อ่างอาบน้ำ
                                             </option>
-                                            <option value="อ่างปลา-อ่างบัว">อ่างปลา/อ่างบัว
+                                            <option value="อ่างเลี้ยงปลา-อ่างบัว">อ่างเลี้ยงปลา-อ่างบัว
                                             </option>
-                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ/สระน้ำเกษตร
+                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ-สระน้ำเกษตร
                                             </option>
                                             <option value="สระว่ายน้ำ">สระว่ายน้ำ</option>
                                         </select>
@@ -258,8 +258,7 @@
 
                                     <div class="form-group">
                                         <label>วันที่สำรวจ</label>
-                                        <input type='datepicker' id="survey_date" name='survey_date'
-                                            class='form-control'>
+                                        <input type='date' id="survey_date" name='survey_date' class='form-control'>
 
                                     </div>
 
@@ -299,7 +298,7 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
     <script>
         let drowning_id = sessionStorage.getItem('drowning_id');
         let drowning_username = sessionStorage.getItem('drowning_username');
@@ -346,7 +345,7 @@
             })
         }
 
-        $("#survey_date").datepicker().datepicker("setDate", new Date());
+        // $("#survey_date").datepicker().datepicker("setDate", new Date());
 
         function getLocation() {
             if (navigator.geolocation) {

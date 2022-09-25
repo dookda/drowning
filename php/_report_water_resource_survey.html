@@ -238,6 +238,7 @@
                                 <tr>
                                     <th>ที่</th>
                                     <th>ประเภท</th>
+                                    <th>การจัดการ</th>
                                     <th>หมู่ที่</th>
                                     <th>หมู่บ้าน</th>
                                     <th>ตำบล</th>
@@ -333,6 +334,21 @@
                         }
                     },
                     { data: 'source_type' },
+                    {
+                        data: '',
+                        render: (data, type, row, meta) => {
+                            let safety
+                            if (row.safty_manage == 'ไม่มีผู้ดูแล-ไม่มีเจ้าของ') {
+                                safety = `<span class="badge bg-danger text-white">${row.safty_manage}</span>`
+                            } else if (row.safty_manage == null) {
+                                safety = `<span class="badge bg-warning text-white">ไม่มีข้อมูล</span>`
+                            } else {
+                                safety = `<span class="badge bg-success text-white">${row.safty_manage}</span>`
+                            }
+
+                            return safety
+                        }
+                    },
                     { data: 'village_no' },
                     { data: 'village_name' },
                     { data: 'tambonname' },
@@ -348,6 +364,7 @@
                             // console.log(row);
                             if (drowning_username == "admin") {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail('${row.id}')"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>
+                                    <button type="button" class="btn btn-outline-warning" onclick="gotoEdit('${row.id}')"><i class="bi bi-gear"></i>&nbsp;แก้ไขข้อมูล</button>
                                     <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('${row.id}','${row.source_type}', '${row.village_name}')"><i class="bi bi-trash"></i>&nbsp;ลบแหล่งน้ำ</button>`
                             } else {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail('${row.id}')"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>`
@@ -442,6 +459,11 @@
         let gotoDetail = (id) => {
             // console.log(ampurcode, byear);
             location.href = "./_form_water_resource_survey_detail.html?id=" + id;
+        }
+
+        let gotoEdit = (id) => {
+            // console.log(ampurcode, byear);
+            location.href = "./_form_water_resource_survey_edit.html?id=" + id;
         }
 
         let confirmDelete = (id, wattype, village) => {

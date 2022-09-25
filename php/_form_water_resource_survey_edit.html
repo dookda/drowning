@@ -155,7 +155,9 @@
                             <div class="col-lg-12">
 
                                 <div id="map"></div>
-                                <form>
+                                <form method="post" id="formExp" name="frmMain"
+                                    action="./service/water_source_survey_update.php">
+
                                     <input type="hidden" name="id" id="id">
                                     <div class="row">
                                         <div class="col-xs-4">
@@ -284,6 +286,8 @@
                                         </select>
                                     </div>
                                     <hr>
+                                    <button type="submit" class="btn btn-success"><i
+                                            class="bi bi-server"></i>&nbsp;บันทึกข้อมูล</button> &nbsp;
                                     <a href="./_report_water_resource_survey.html" class="btn btn-outline-info"><i
                                             class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานแหล่งน้ำเสี่ยง</a>
                                 </form>

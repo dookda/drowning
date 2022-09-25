@@ -274,7 +274,7 @@
             $("#logout").show()
         } else {
             $("#login").show()
-            location.href = "./_form_login.html";
+            // location.href = "./_form_login.html";
         }
 
         let loadTable = () => {
@@ -282,7 +282,7 @@
                 ajax: {
                     type: "POST",
                     url: './service/pop.php',
-                    data: { userid: "sakda" },
+                    data: { userid: "xx" },
                     dataSrc: 'data'
                 },
                 columns: [

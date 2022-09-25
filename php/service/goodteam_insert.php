@@ -12,7 +12,7 @@
 				}
 			}
 			if($query) {
-				header("location:./../_form_team_rate.html?cid=".$cid);
+				header("location:./../_report_team.html");
 			}
 			mysqli_close($objCon);
 		}	

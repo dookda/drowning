@@ -196,6 +196,11 @@
                         <div class="mb-3">
                             <a class="btn btn-success" href="./_form_team.html"><i class="bi bi-plus-circle"></i>&nbsp;
                                 เพิ่มทีม</a>
+
+
+                            <a class="btn btn-primary" href="./_form_team_rate.html"><i
+                                    class="bi bi-plus-circle"></i>&nbsp;
+                                ประเมินตนเอง</a>
                         </div>
                         <h5>เลือกจังหวัดและประเภทที่ต้องการสืบค้น</h5>
                         <div class="row">
@@ -251,6 +256,8 @@
                                     <th>amp</th>
                                     <th>prov</th>
                                     <th>วันรับรองผล</th>
+                                    <th>วันครบรอบการรับรอง</th>
+                                    <th>สถานะ</th>
                                     <th>เพิ่มเติม</th>
                                 </tr>
                             </thead>
@@ -342,11 +349,26 @@
                     { data: 'ampur' },
                     { data: 'changwat' },
                     { data: 'approv_date' },
+                    { data: 'expire' },
+                    {
+                        data: '',
+                        render: (data, type, row, meta) => {
+                            let expire
+                            if (row.renew == 'ครบกำหนด') {
+                                expire = `<span class="badge bg-warning text-white">${row.renew}</span>`
+                            } else {
+
+                                expire = `<span class="badge bg-success text-white">${row.renew}</span>`
+                            }
+                            return expire
+                        }
+                    },
                     {
                         data: null,
                         render: function (data, type, row, meta) {
                             if (drowning_username == "admin") {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail(${row.id})"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>
+                                    <button type="button" class="btn btn-outline-warning" onclick="gotoUpdate(${row.id})"><i class="bi bi-journal-richtext"></i>&nbsp;แกไขข้อมูล</button>
                                     <button type="button" class="btn btn-outline-danger" onclick="confirmDelete(${row.id},'${row.team_name}')"><i class="bi bi-trash"></i>&nbsp;ลบ</button>`
                             } else {
                                 return `<button type="button" class="btn btn-outline-success" onclick="gotoDetail(${row.id})"><i class="bi bi-journal-richtext"></i>&nbsp;ดูข้อมูล</button>`
@@ -442,6 +464,9 @@
 
         let gotoDetail = (id) => {
             location.href = "./_form_team_detail.html?id=" + id;
+        }
+        let gotoUpdate = (id) => {
+            location.href = "./_form_team_update.html?id=" + id;
         }
 
         let confirmDelete = (id, tname) => {
