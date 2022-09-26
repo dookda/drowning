@@ -31,7 +31,7 @@
 		// send notify
 		$url = "https://rti2dss.com/p3000/api/pushmsg";
 		$data = array(
-			'userId'=>'insert'
+			'status'=>'รายงานสอบสวน'
 		);
 		$ch = curl_init($url);
 		$jsonDataEncoded = json_encode($data);

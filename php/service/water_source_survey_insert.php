@@ -23,7 +23,7 @@
 	
 			$url = "https://rti2dss.com/p3000/api/pushmsg";
 			$data = array(
-				'userId'=>'insert water resource'
+				'status'=>'แหล่งน้ำเสี่ยง'
 			);
 			$ch = curl_init($url);
 			$jsonDataEncoded = json_encode($data);
