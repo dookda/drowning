@@ -17,16 +17,16 @@
 				header("location:./../_report_water_resource_survey.html");
 			}
 	
-			$url = "https://rti2dss.com/p3000/api/pushmsg";
-			$data = array(
-				'userId'=>'update water resource'
-			);
-			$ch = curl_init($url);
-			$jsonDataEncoded = json_encode($data);
-			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
-			$result = curl_exec($ch);
+			// $url = "https://rti2dss.com/p3000/api/pushmsg";
+			// $data = array(
+			// 	'userId'=>'update water resource'
+			// );
+			// $ch = curl_init($url);
+			// $jsonDataEncoded = json_encode($data);
+			// curl_setopt($ch, CURLOPT_POST, 1);
+			// curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+			// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
+			// $result = curl_exec($ch);
 	
 			mysqli_close($objCon);
 		}	
