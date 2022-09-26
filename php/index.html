@@ -353,26 +353,26 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
-            layers: 'th:province_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const pro = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
+        //     layers: 'th:province_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
-        const amp = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
-            layers: 'th:amphoe_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const amp = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
+        //     layers: 'th:amphoe_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
-        const tam = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
-            layers: 'th:tamon_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const tam = L.tileLayer.wms(geoserver + "/geoserver/th/wms?", {
+        //     layers: 'th:tamon_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
         let fs_dead = L.featureGroup()
         let fs_risk = L.featureGroup()
@@ -386,9 +386,9 @@
         }
 
         var overlayMap = {
-            "ขอบเขตจังหวัด": pro.addTo(map),
-            "ขอบเขตอำเภอ": amp,
-            "ขอบเขตตำบล": tam,
+            // "ขอบเขตจังหวัด": pro.addTo(map),
+            // "ขอบเขตอำเภอ": amp,
+            // "ขอบเขตตำบล": tam,
             "<img src='./img/red.png' width='25px'>จุดเสี่ยง": fs_risk.addTo(map),
             "จุดอันตราย<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./img/black.png' width='25px'>: เสียชีวิต<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='./img/green.png' width='25px'>: รอดชีวิต": fs_dead.addTo(map),
             "อัตราตาย<br/>&nbsp;&nbsp;&nbsp;<img src='./img/legend.png' width='200px'>": fs_ratio.addTo(map)
@@ -555,7 +555,7 @@
         let loadSex = (year) => {
             $.get("./service/chart_dashboard.php?type=statBySex&year=" + year).done(async r => {
                 let data = JSON.parse(r).data
-                console.log(data);
+                // console.log(data);
                 let male = 0
                 let female = 0
                 // await data.filter(i => i.sex == "ชาย" ? male += 1 : female += 1)
@@ -576,7 +576,7 @@
         let loadTable = (year) => {
             $.get("./service/chart_dashboard.php?type=statByTab&year=" + year).done(async r => {
                 let data = JSON.parse(r).data
-                console.log(data);
+                // console.log(data);
                 $("tbody").empty()
                 let alive_lt15 = 0;
                 let alive_gt15 = 0;
