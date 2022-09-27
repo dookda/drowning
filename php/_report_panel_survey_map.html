@@ -172,8 +172,8 @@
 
                 <div class="col-sm-4">
                     <br />
-                    <a href="./_report_water_resource_survey.html" class="btn btn-outline-info"><i
-                            class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานแหล่งน้ำเสี่ยง</a>
+                    <a href="./_report_panel_survey.html" class="btn btn-outline-info"><i
+                            class="bi bi-box-arrow-in-left"></i>&nbsp;กลับหน้ารายงานคอกกั้น</a>
                 </div>
             </div>
         </div>
@@ -242,26 +242,26 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         });
 
-        const pro = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
-            layers: 'th:province_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const pro = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        //     layers: 'th:province_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
-        const amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
-            layers: 'th:amphoe_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const amp = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        //     layers: 'th:amphoe_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
-        const tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
-            layers: 'th:tamon_4326',
-            format: 'image/png',
-            transparent: true,
-            CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
-        });
+        // const tam = L.tileLayer.wms("https://rti2dss.com:8443/geoserver/th/wms?", {
+        //     layers: 'th:tamon_4326',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     CQL_FILTER: 'pro_code=53 OR pro_code=63 OR pro_code=64 OR pro_code=65 OR pro_code=67'
+        // });
 
         let fs_risk = L.featureGroup()
 
@@ -273,9 +273,9 @@
         }
 
         var overlayMap = {
-            "ขอบเขตจังหวัด": pro.addTo(map),
-            "ขอบเขตอำเภอ": amp,
-            "ขอบเขตตำบล": tam,
+            // "ขอบเขตจังหวัด": pro.addTo(map),
+            // "ขอบเขตอำเภอ": amp,
+            // "ขอบเขตตำบล": tam,
             "<img src='./img/red.png' width='25px'>จุดเสี่ยง": fs_risk.addTo(map)
         }
 
@@ -309,14 +309,14 @@
 
         let loadMarker = (year) => {
             map.eachLayer(i => {
-
                 i.options.name == "marker" || i.options.name == "poly" ? map.removeLayer(i) : null;
             })
 
-            $.get("./service/water_source_survey_by_year.php?type=risk&year=" + year).done(r => {
+            $.get("./service/panel_survey_by_year.php?type=risk&year=" + year).done(r => {
                 let data = JSON.parse(r)
+
+                // console.log(r);
                 data.data.map(i => {
-                    // console.log(i);
                     if (Number(i.lat) > 100) {
                         $.get("https://rti2dss.com:3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
                             // console.log(r.data[0])
@@ -361,7 +361,7 @@
             loadMarker($("#year").val())
             $("#titleyear").text(Number($("#year").val()) + 543)
         })
-        let initYear = 2018
+        let initYear = 2022
         loadMarker(initYear)
         $("#titleyear").text(Number(initYear) + 543)
 
