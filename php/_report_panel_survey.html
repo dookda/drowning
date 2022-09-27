@@ -135,7 +135,7 @@
 
     <div class="container mt-100 mb-20">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-2 mb-3">
                 <div class="card">
                     <nav class="pill-nav">
                         <a class="" href="./index.html">หน้าหลัก</a>
@@ -155,11 +155,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
-                            <a class="btn btn-success" href="./_form_water_resource_survey.html"><i
+                            <a class="btn btn-success" href="./_form_panel_resource_survey.html"><i
                                     class="bi bi-plus-circle"></i>&nbsp;
-                                เพิ่มแหล่งน้ำ</a>
-                            <a class="btn btn-outline-info" href="./_report_water_resource_survey_map.html"><i
-                                    class="bi bi-map"></i>&nbsp;แผนที่แสดงจุดเสี่ยง</a>
+                                เพิ่มคอกกั้น</a>
+                            <a class="btn btn-outline-info" href="./_report_panel_resource_survey_map.html"><i
+                                    class="bi bi-map"></i>&nbsp;แผนที่แสดงคอกกั้น</a>
                         </div>
                         <h5>เลือกจังหวัดและประเภทที่ต้องการสืบค้น</h5>
                         <div class="row">
@@ -187,49 +187,6 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>ประเภท</label>
-                                    <select class="form-select filter-type" name="year" data-column-index='1'>
-                                        <option value="">ทุกประเภท</option>
-                                        <option value="อ่างอาบน้ำ">อ่างอาบน้ำ</option>
-                                        <option value="โอ่งน้ำ">โอ่งน้ำ</option>
-                                        <option value="ถุงน้ำ">ถุงน้ำ</option>
-                                        <option value="กะละมัง">กะละมัง</option>
-                                        <option value="สระว่ายน้ำยาง">สระว่ายน้ำยาง</option>
-                                        <option value="อ่างเลี้ยงปลา">อ่างเลี้ยงปลา</option>
-                                        <option value="บ่อน้ำโยก">บ่อน้ำโยก</option>
-                                        <option value="แอ่งน้ำขัง">แอ่งน้ำขัง</option>
-                                        <option value="ท่อระบายน้ำ">ท่อระบายน้ำ</option>
-                                        <option value="สระว่ายน้ำ">สระว่ายน้ำ</option>
-                                        <option value="บ่อน้ำ/สระน้ำเพื่อการเกษตร">
-                                            บ่อน้ำ/สระน้ำเพื่อการเกษตร
-                                        </option>
-                                        <option value="คลอง">คลอง</option>
-                                        <option value="แม่น้ำ">แม่น้ำ</option>
-                                        <option value="น้ำตก">น้ำตก</option>
-                                        <option value="เขื่อน">เขื่อน</option>
-                                        <option value="อ่างเก็บน้ำ">อ่างเก็บน้ำ</option>
-                                        <option value="ทะเล">ทะเล</option>
-                                        <option value="ฝายเก็บน้ำ/ฝายชะลอน้ำ">ฝายเก็บน้ำ/ฝายชะลอน้ำ</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>ปีที่สำรวจ</label>
-                                    <select class="form-select filter-year" name="year" data-column-index='10'>
-                                        <option value="">ทุกปี</option>
-                                        <option value="2560">2560</option>
-                                        <option value="2561">2561</option>
-                                        <option value="2562">2562</option>
-                                        <option value="2563">2563</option>
-                                        <option value="2564">2564</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,8 +196,7 @@
                             <thead>
                                 <tr>
                                     <th>ที่</th>
-                                    <th>ประเภท</th>
-                                    <th>การจัดการ</th>
+                                    <th>รายละเอียด</th>
                                     <th>หมู่ที่</th>
                                     <th>หมู่บ้าน</th>
                                     <th>ตำบล</th>
@@ -249,7 +205,6 @@
                                     <th>tam</th>
                                     <th>amp</th>
                                     <th>prov</th>
-                                    <th>ปี</th>
                                     <th>เพิ่มเติม</th>
                                 </tr>
                             </thead>
@@ -324,7 +279,7 @@
             let dtable = $('#table').DataTable({
                 ajax: {
                     type: "POST",
-                    url: './service/water_source_survey.php',
+                    url: './service/panel_source_survey.php',
                     // data: { drowning_ampcode: drowning_ampcode },
                     dataSrc: 'data'
                 },
@@ -336,22 +291,7 @@
                             return `<span class="badge bg-info text-white">${meta.row + 1}</span>`
                         }
                     },
-                    { data: 'source_type' },
-                    {
-                        data: '',
-                        render: (data, type, row, meta) => {
-                            let safety
-                            if (row.safty_manage == 'ไม่มีผู้ดูแล-ไม่มีเจ้าของ') {
-                                safety = `<span class="badge bg-danger text-white">${row.safty_manage}</span>`
-                            } else if (row.safty_manage == null) {
-                                safety = `<span class="badge bg-warning text-white">ไม่มีข้อมูล</span>`
-                            } else {
-                                safety = `<span class="badge bg-success text-white">${row.safty_manage}</span>`
-                            }
-
-                            return safety
-                        }
-                    },
+                    { data: 'txt' },
                     { data: 'village_no' },
                     { data: 'village_name' },
                     { data: 'tambonname' },
@@ -360,7 +300,6 @@
                     { data: 'tambon' },
                     { data: 'amphur' },
                     { data: 'province' },
-                    { data: 'yr' },
                     {
                         data: null,
                         render: function (data, type, row, meta) {
@@ -385,9 +324,9 @@
             });
 
             // dtable.column(1).visible(false);
+            dtable.column(7).visible(false);
             dtable.column(8).visible(false);
             dtable.column(9).visible(false);
-            dtable.column(10).visible(false);
 
             dtable.on('search.dt', function () {
                 let data = dtable.rows({ search: 'applied' }).data()
@@ -461,12 +400,12 @@
 
         let gotoDetail = (id) => {
             // console.log(ampurcode, byear);
-            location.href = "./_form_water_resource_survey_detail.html?id=" + id;
+            location.href = "./_form_panel_resource_survey_detail.html?id=" + id;
         }
 
         let gotoEdit = (id) => {
             // console.log(ampurcode, byear);
-            location.href = "./_form_water_resource_survey_edit.html?id=" + id;
+            location.href = "./_form_panel_resource_survey_edit.html?id=" + id;
         }
 
         let confirmDelete = (id, wattype, village) => {
@@ -485,7 +424,7 @@
         let deleteValue = () => {
             let id = $("#id").val()
             console.log(id)
-            $.post("./service/water_source_survey_delete.php", { id: id }).done(r => {
+            $.post("./service/panel_survey_delete.php", { id: id }).done(r => {
                 r.status == "success" ? closeModal() : null
             })
         }

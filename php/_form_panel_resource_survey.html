@@ -123,7 +123,7 @@
 
     <div class="container mt-100 mb-20">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-2 mb-3">
                 <div class="card">
                     <nav class="pill-nav">
                         <a class="" href="./index.html">หน้าหลัก</a>
@@ -149,7 +149,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <form method="post" id="formExp" name="frmMain"
-                                    action="./service/water_source_survey_insert.php">
+                                    action="./service/panel_survey_insert.php">
 
                                     <div class="row">
                                         <div class="col-xs-4">
@@ -181,6 +181,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label>คำอธิบาย</label>
+                                        <input type="text" name="txt" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
                                         <div class="col-xs-6">
                                             <label>ละติจูด</label>
                                             <input type="number" step="any" id="lat" name="lat" class="form-control">
@@ -193,69 +198,6 @@
                                         <button type="button" class="btn btn-outline-info"
                                             onclick="getLocation()">ค้นหาตำแหน่ง</button>
                                         <p></p>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>แหล่งน้ำ</label>
-                                        <select name="source_type" class="form-select">
-                                            <option value=""></option>
-                                            <option value="แม่น้ำ">แม่น้ำ</option>
-                                            <option value="ลำคลอง-ลำห้วย">ลำคลอง/ลำห้วย</option>
-                                            <option value="อ่างเก็บน้ำ-ฝายเก็บน้ำ">
-                                                อ่างเก็บน้ำ-ฝายเก็บน้ำ
-                                            </option>
-                                            <option value="เขื่อน">เขื่อน</option>
-                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ-สระน้ำเกษตร
-                                            </option>
-                                            <option value="คลองชลประทาน">คลองชลประทาน </option>
-                                            <option value="ภาชนะเก็บน้ำ-อ่างอาบน้ำ">
-                                                ภาชนะเก็บน้ำ-อ่างอาบน้ำ
-                                            </option>
-                                            <option value="อ่างเลี้ยงปลา-อ่างบัว">อ่างเลี้ยงปลา-อ่างบัว
-                                            </option>
-                                            <option value="บ่อน้ำ-สระน้ำเกษตร">บ่อน้ำ-สระน้ำเกษตร
-                                            </option>
-                                            <option value="สระว่ายน้ำ">สระว่ายน้ำ</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>ระยะห่างจากชุมชน</label>
-                                        <select name="distance_village_mater" class="form-select">
-                                            <option value=""></option>
-                                            <option value="1">น้อยกว่า 10 เมตร</option>
-                                            <option value="2">10-50 เมตร</option>
-                                            <option value="3">51-100 เมตร</option>
-                                            <option value="4">51-100 เมตร</option>
-                                            <option value="5">251-500 เมตร</option>
-                                            <option value="6">มากกว่า 500 เมตร</option>
-
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>การป้องกันและการจัดการ</label>
-                                        <select name="safty_manage" class="form-select">
-                                            <option value=""></option>
-                                            <option value="มีแนวกั้น-รั้วกัน">มีแนวกั้น-รั้วกัน</option>
-                                            <option value="มีป้ายเตือนห้ามลงเล่นน้ำ">
-                                                มีป้ายเตือนห้ามลงเล่นน้ำ
-                                            </option>
-                                            <option value="มีวัสดุอุปกรณ์ช่วยคนตกน้ำ">
-                                                มีวัสดุอุปกรณ์ช่วยคนตกน้ำ
-                                            </option>
-                                            <option value="เป็นแหล่งน้ำมีเจ้าของ">
-                                                เป็นแหล่งน้ำมีเจ้าของ</option>
-                                            <option value="ชุมชนร่วมดูแลแหล่งน้ำ">
-                                                ชุมชนร่วมดูแลแหล่งน้ำ</option>
-                                            <option value="องค์กรปกครองส่วนท้องถิ่นดูแล">
-                                                องค์กรปกครองส่วนท้องถิ่นดูแล
-                                            </option>
-                                            <option value="ไม่มีผู้ดูแล-ไม่มีเจ้าของ">
-                                                ไม่มีผู้ดูแล-ไม่มีเจ้าของ
-                                            </option>
-                                            <option value="มีฝาปิด">มีฝาปิด</option>
-                                        </select>
                                     </div>
 
                                     <div class="form-group">
