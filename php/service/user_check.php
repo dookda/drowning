@@ -3,7 +3,7 @@
     $type = $_POST["type"];
     
     // print_r($_POST);
-    $datArr = array();
+    // $datArr = array();
     $products_arr["data"]=array();
 
     if($_POST["type"]=="username"){

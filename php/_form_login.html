@@ -181,6 +181,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <script>
         // let drowning_id = sessionStorage.getItem('drowning_id');
         // let drowning_username = sessionStorage.getItem('drowning_username');
@@ -201,7 +203,6 @@
         $(':input[type="button"]').prop('disabled', true);
         // let username = $("#username").val()
         // console.log(username);
-
         $("#username").keyup(r => {
             $.post("./service/user_check.php", { type: "username", username: $("#username").val() }).done(r => {
                 let data = JSON.parse(r)
@@ -218,10 +219,9 @@
         let login = () => {
             const username = $("#username").val()
             const password = $("#password").val()
-            $.post("./service/user_login.php", { username: username, password: password }).done(r => {
-
+            $.post("./service/user_login.php", { username: username, password: CryptoJS.MD5(password).toString() }).done(r => {
                 const data = JSON.parse(r)
-                console.log(data);
+                // console.log(data);
                 if (data.data.length > 0) {
                     data.data.map(i => {
                         // console.log(i);
@@ -233,7 +233,6 @@
                 }
             })
         }
-
     </script>
 </body>
 
