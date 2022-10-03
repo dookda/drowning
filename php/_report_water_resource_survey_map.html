@@ -153,6 +153,8 @@
                     <div class="col-sm-4">
                         <label for="">ปี พ.ศ.</label>
                         <select class="form-select" id="year">
+                            <option value="2023">2566</option>
+                            <option value="2022">2565</option>
                             <option value="2021">2564</option>
                             <option value="2020">2563</option>
                             <option value="2019">2562</option>
@@ -273,9 +275,9 @@
         }
 
         var overlayMap = {
-            "ขอบเขตจังหวัด": pro.addTo(map),
-            "ขอบเขตอำเภอ": amp,
-            "ขอบเขตตำบล": tam,
+            // "ขอบเขตจังหวัด": pro.addTo(map),
+            // "ขอบเขตอำเภอ": amp,
+            // "ขอบเขตตำบล": tam,
             "<img src='./img/red.png' width='25px'>จุดเสี่ยง": fs_risk.addTo(map)
         }
 
@@ -289,8 +291,14 @@
         });
 
         var redMarker = L.AwesomeMarkers.icon({
-            icon: 'exclamation-triangle',
+            icon: 'ban',
             markerColor: 'red',
+            prefix: 'fa'
+        });
+
+        var yellowMarker = L.AwesomeMarkers.icon({
+            icon: 'check',
+            markerColor: 'green',
             prefix: 'fa'
         });
 
@@ -315,15 +323,24 @@
 
             $.get("./service/water_source_survey_by_year.php?type=risk&year=" + year).done(r => {
                 let data = JSON.parse(r)
+                let icon
                 data.data.map(i => {
                     // console.log(i);
+                    if (i.safty_manage == 'ไม่มีผู้ดูแล-ไม่มีเจ้าของ') {
+                        icon = redMarker
+                    } else if (i.safty_manage == null) {
+                        icon = redMarker
+                    } else {
+                        icon = yellowMarker
+                    }
+
                     if (Number(i.lat) > 100) {
-                        $.get("https://rti2dss.com:3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
+                        $.get("https://rti2dss.com/p3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
                             // console.log(r.data[0])
                             let latlon = [Number(r.data[0].lat), Number(r.data[0].lon)]
                             // map.setView(latlon, 13);
                             fs_risk.addLayer(
-                                L.marker(latlon, { icon: redMarker, name: "marker" }
+                                L.marker(latlon, { icon: icon, name: "marker" }
                                 ).addTo(map).bindPopup(`<b>วันที่สำรวจ: </b>  ${i.survey_date} <br/>
                                 ประเภทแหล่งน้ำ:  ${i.source_type}<br/>
                                 การจัดการความปลอดภัย:  ${i.safty_manage}<br/>
@@ -336,7 +353,7 @@
                         // map.setView(latlon, 13);
                         fs_risk.addLayer(
                             L.marker(
-                                [Number(i.lat), Number(i.lon)], { icon: redMarker, name: "marker" }
+                                [Number(i.lat), Number(i.lon)], { icon: icon, name: "marker" }
                             ).addTo(map).bindPopup(`<b>วันที่สำรวจ: </b>  ${i.survey_date} <br/>
                                 ประเภทแหล่งน้ำ:  ${i.source_type}<br/>
                                 การจัดการความปลอดภัย:  ${i.safty_manage}<br/>

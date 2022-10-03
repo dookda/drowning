@@ -460,8 +460,14 @@
         });
 
         var redMarker = L.AwesomeMarkers.icon({
-            icon: 'exclamation-triangle',
+            icon: 'ban',
             markerColor: 'red',
+            prefix: 'fa'
+        });
+
+        var yellowMarker = L.AwesomeMarkers.icon({
+            icon: 'check',
+            markerColor: 'green',
             prefix: 'fa'
         });
 
@@ -480,7 +486,7 @@
                 $('#ddlAmp').val(data.data[0].amphur);
                 $('#ddlTam').val(data.data[0].tambon);
             }, 1000);
-
+            let icon
             data.data.map(i => {
                 console.log(i);
                 $("#village_no").val(i.village_no)
@@ -493,12 +499,21 @@
                 $("#survey_date").val(i.survey_date)
                 $("#surveyer").val(i.surveyer)
 
+                // console.log(i);
+                if (i.safty_manage == 'ไม่มีผู้ดูแล-ไม่มีเจ้าของ') {
+                    icon = redMarker
+                } else if (i.safty_manage == null) {
+                    icon = redMarker
+                } else {
+                    icon = yellowMarker
+                }
+
                 if (Number(i.lat) > 100) {
                     $.get("https://rti2dss.com/p3000/api/utm2latlon/" + i.lat + "/" + i.lon).done(r => {
                         console.log(r.data[0])
                         let latlon = [Number(r.data[0].lat), Number(r.data[0].lon)]
                         map.setView(latlon, 13);
-                        L.marker(latlon, { icon: redMarker, name: "marker" }
+                        L.marker(latlon, { icon: icon, name: "marker" }
                         ).addTo(map).bindPopup(`<b>วันที่สำรวจ: </b>  ${i.survey_date} <br/>
                                 ประเภทแหล่งน้ำ:  ${i.source_type}<br/>
                                 การจัดการความปลอดภัย:  ${i.safty_manage}<br/>
@@ -509,7 +524,7 @@
                     let latlon = [Number(i.lat), Number(i.lon)]
                     map.setView(latlon, 13);
                     L.marker(
-                        [Number(i.lat), Number(i.lon)], { icon: redMarker, name: "marker" }
+                        [Number(i.lat), Number(i.lon)], { icon: icon, name: "marker" }
                     ).addTo(map).bindPopup(`<b>วันที่สำรวจ: </b>  ${i.survey_date} <br/>
                                 ประเภทแหล่งน้ำ:  ${i.source_type}<br/>
                                 การจัดการความปลอดภัย:  ${i.safty_manage}<br/>
