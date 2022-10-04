@@ -206,11 +206,11 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
     <script>
-        let drowning_id = sessionStorage.getItem('drowning_id');
-        let drowning_username = sessionStorage.getItem('drowning_username');
+        let drowning_id = localStorage.getItem('drowning_id');
+        let drowning_username = localStorage.getItem('drowning_username');
 
         let logout = () => {
-            sessionStorage.clear();
+            localStorage.clear();
             location.href = "./_form_login.html";
         }
 

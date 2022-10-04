@@ -191,11 +191,11 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
 
     <script type="text/javascript">
-        let drowning_id = sessionStorage.getItem('drowning_id');
-        let drowning_username = sessionStorage.getItem('drowning_username');
+        let drowning_id = localStorage.getItem('drowning_id');
+        let drowning_username = localStorage.getItem('drowning_username');
 
         let logout = () => {
-            sessionStorage.clear();
+            localStorage.clear();
             location.href = "./_form_login.html";
         }
 

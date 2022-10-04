@@ -182,11 +182,11 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
     <script>
-        // let drowning_id = sessionStorage.getItem('drowning_id');
-        // let drowning_username = sessionStorage.getItem('drowning_username');
+        // let drowning_id = localStorage.getItem('drowning_id');
+        // let drowning_username = localStorage.getItem('drowning_username');
 
         // let logout = () => {
-        //     sessionStorage.clear();
+        //     localStorage.clear();
         //     location.href = "./_form_login.html";
         // }
 
@@ -225,9 +225,9 @@
                 if (data.data.length > 0) {
                     data.data.map(i => {
                         console.log(i);
-                        sessionStorage.setItem('drowning_id', i.id);
-                        sessionStorage.setItem('drowning_username', i.username);
-                        sessionStorage.setItem('drowning_ampcode', i.ampcode);
+                        localStorage.setItem('drowning_id', i.id);
+                        localStorage.setItem('drowning_username', i.username);
+                        localStorage.setItem('drowning_ampcode', i.ampcode);
                     })
                     location.href = "./index.html";
                 }
