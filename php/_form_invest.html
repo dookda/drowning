@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./bootstrap-datepicker-thai/css/datepicker.css">
 </head>
 <style>
     body {
@@ -184,7 +185,7 @@
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label class="b"> 1)วันที่เกิดเหตุ</label>
-                                        <input type='date' name='drowning_date' class='form-control'>
+                                        <input type='text' name='drowning_date' id='drowning_date' class='form-control'>
 
                                     </div>
                                 </div>
@@ -202,7 +203,7 @@
                                 <div class="col-xs-4">
                                     <div class="form-group">
                                         <label>วันที่เสียชีวิต</label>
-                                        <input type='date' name='dead_date' class='form-control'>
+                                        <input type='text' name='dead_date' id='dead_date' class='form-control'>
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +259,7 @@
                                     <div class="form-group">
                                         <label>หมู่ที่</label>
                                         <div class="input-group">
-                                            <input type="text" name="moo_addr" class="form-controly">
+                                            <input type="text" name="moo_addr" class="form-control">
 
                                         </div>
                                     </div>
@@ -772,7 +773,8 @@
                                     วันที่รายงาน</label>
                                 <div class="">
                                     <div class="input-group bootstrap-timepicker timepicker">
-                                        <input type="date" name="report_date" class="form-control input-small">
+                                        <input type="text" name="report_date" id="report_date"
+                                            class="form-control input-small">
                                         <span class="input-group-addon"><i
                                                 class="glyphicon glyphicon-calendar"></i></span>
                                     </div>
@@ -804,8 +806,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
-
-
+    <script src="./bootstrap-datepicker-thai/js/bootstrap-datepicker.js"></script>
+    <script src="./bootstrap-datepicker-thai/js/bootstrap-datepicker-thai.js"></script>
+    <script src="./bootstrap-datepicker-thai/js/locales/bootstrap-datepicker.th.js"></script>
     <script type="text/javascript">
         let drowning_id = localStorage.getItem('drowning_id');
         let drowning_username = localStorage.getItem('drowning_username');
@@ -901,6 +904,26 @@
         ListPro()
         ListProHome()
         RePro()
+
+
+        $("#report_date").datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        $("#drowning_date").datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
+        $("#dead_date").datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+
         // <!------------------------ยกเลิก radio------------------------------>
         var allRadios = document.getElementsByName('home_addr');
         var booRadio;

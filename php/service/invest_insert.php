@@ -10,6 +10,13 @@
 		$query = "";
 		foreach ($_POST as $key => $value) {
 			if(!empty($value)){
+				$value = $value;
+				if($key=="drowning_date" || $key=="dead_date" || $key=="report_date" ){
+					$datArr  = explode("/",$value);
+					// print_r($datArr[0]);
+					$value = ((int)$datArr[2]-543)."-".$datArr[1]."-".$datArr[0];
+				}
+
 				$sql2 = "UPDATE report_dead SET $key='$value' WHERE gid='$gid'";
                 // print($sql2."<br/>");
 				$query = mysqli_query($objCon,$sql2);
