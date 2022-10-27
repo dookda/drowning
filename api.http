@@ -12,3 +12,12 @@ content-type: application/json
 {
     "userid" : "U176de9c656286feb470b121c184e1356"
 }
+
+###
+GET http://localhost/service/invest.php?drowning_ampcode=6501
+
+content-type: application/json
+
+{
+    "drowning_ampcode" : "6501"
+}

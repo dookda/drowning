@@ -4,7 +4,7 @@
     $password_hash = $_POST["password"];
     // $datArr = array();
     $products_arr["data"]=array();
-    $strSQL = "SELECT id, username FROM user 
+    $strSQL = "SELECT id, username, ampcode FROM user 
         WHERE username='$username' AND MD5(password_hash)='$password_hash'";
     $objQuery = mysqli_query($objCon, $strSQL);
     while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){

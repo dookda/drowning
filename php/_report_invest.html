@@ -338,6 +338,7 @@
     <script type="text/javascript">
         let drowning_id = localStorage.getItem('drowning_id');
         let drowning_username = localStorage.getItem('drowning_username');
+        let drowning_ampcode = localStorage.getItem('drowning_ampcode');
 
         let logout = () => {
             localStorage.clear();
@@ -358,9 +359,8 @@
         let loadTable = () => {
             let dtable = $('#table').DataTable({
                 ajax: {
-                    type: "POST",
-                    url: './service/invest.php',
-                    data: { userid: "xxx" },
+                    type: "GET",
+                    url: "./service/invest.php?drowning_ampcode=" + drowning_ampcode + "&drowning_username=" + drowning_username,
                     dataSrc: 'data'
                 },
                 columns: [
