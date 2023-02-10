@@ -2,7 +2,7 @@
 $db_config = array(
     "host" => "db",  // กำหนด host
     "user" => "admin", // กำหนดชื่อ user      root
-    "pass" => "12345", //                    AAaa@!2019
+    "pass" => "AAaa2023", //                    AAaa@!2019
     // "pass"=>"qazwsxedcr112233",   // กำหนดรหัสผ่าน
     "dbname" => "jomnam2",  // กำหนดชื่อฐานข้อมูล
     "charset" => "utf8"  // กำหนด charset

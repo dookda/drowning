@@ -17,10 +17,10 @@ services:
       - dbdata:/var/lib/mysql
       - ./jomnam2.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
-      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: AAaa2023
       MYSQL_DATABASE: jomnam2
       MYSQL_USER: admin
-      MYSQL_PASSWORD: 12345
+      MYSQL_PASSWORD: AAaa2023
     ports:
       - "9906:3306"
   phpmyadmin:
