@@ -15,7 +15,7 @@ services:
     restart: always
     volumes:
       - dbdata:/var/lib/mysql
-      - ./jomnam2.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./database/jomnam2.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       MYSQL_ROOT_PASSWORD: AAaa2023
       MYSQL_DATABASE: jomnam2
