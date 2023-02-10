@@ -14,5 +14,6 @@ if(mysqli_connect_error()) {
     exit;
 }
 
+// test
+
 $objCon->set_charset("utf8");
-?>
