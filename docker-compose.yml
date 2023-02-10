@@ -19,8 +19,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: jomnam2
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: AAaa2023
+      MYSQL_USER: sakda
+      MYSQL_PASSWORD: 1234
     ports:
       - "9906:3306"
   phpmyadmin:
