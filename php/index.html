@@ -176,6 +176,7 @@
                             <div class="card-body">
                                 <label for="">เลือกปี พ.ศ.</label>
                                 <select class="form-select" id="year">
+                                    <option value="2023">2566</option>
                                     <option value="2022">2565</option>
                                     <option value="2021">2564</option>
                                     <option value="2020">2563</option>
@@ -305,7 +306,8 @@
     <script type="text/javascript">
         let drowning_id = localStorage.getItem('drowning_id');
         let drowning_username = localStorage.getItem('drowning_username');
-
+		let drowning_level = localStorage.getItem('drowning_level');
+        
         let logout = () => {
             localStorage.clear();
             location.href = "./_form_login.html";

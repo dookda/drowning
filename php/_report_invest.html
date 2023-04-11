@@ -339,6 +339,7 @@
         let drowning_id = localStorage.getItem('drowning_id');
         let drowning_username = localStorage.getItem('drowning_username');
         let drowning_ampcode = localStorage.getItem('drowning_ampcode');
+        let drowning_level = localStorage.getItem('drowning_level');
 
         let logout = () => {
             localStorage.clear();
@@ -360,7 +361,7 @@
             let dtable = $('#table').DataTable({
                 ajax: {
                     type: "GET",
-                    url: "./service/invest.php?drowning_ampcode=" + drowning_ampcode + "&drowning_username=" + drowning_username,
+                    url: "./service/invest.php?drowning_ampcode=" + drowning_ampcode + "&drowning_username=" + drowning_username + "&drowning_level="+ drowning_level,
                     dataSrc: 'data'
                 },
                 columns: [
