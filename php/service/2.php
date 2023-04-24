@@ -1,5 +1,19 @@
 <?PHP
+session_start();
+if ($_SESSION["level"]<>'superadmin'){
+/*
+?>	
+		<script type="text/javascript" >
+		alert("เกิดข้อผิดพลาด : ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบข้อมูลใหม่อีกครั้ง");exit();
+        </script>	
+<?PHP	
+*/
+		echo "<script>";
+    	echo "window.location.assign('../')";
+		echo "</script>";
+	} else {
 require('./connect.php');
+	}
 $sql = mysqli_query($objCon,
 "SELECT
 	*, 
