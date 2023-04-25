@@ -1,23 +1,18 @@
 <?PHP
 session_start();
-if ($_SESSION["level"]<>'superadmin'){
-/*
-?>	
-		<script type="text/javascript" >
-		alert("เกิดข้อผิดพลาด : ข้อมูลไม่ถูกต้อง กรุณาตรวจสอบข้อมูลใหม่อีกครั้ง");exit();
-        </script>	
-<?PHP	
-*/
-		echo "<script>";
-    	echo "window.location.assign('../')";
-		echo "</script>";
-	} else {
-header("Content-type: application/vnd.ms-excel");
-// header('Content-type: application/csv'); //*** CSV ***//
-header("Content-Disposition: attachment; filename=export_event.xls");
-
-require('./connect.php');
+if ($_SESSION["level"]<>'superadmin' || time()-$_SESSION["login_time_stamp"] >1800)
+			{
+				session_destroy();
+				echo "<script>";
+				echo "window.location.assign('../')";
+				echo "</script>";
+			} else {
+				require('./connect.php');
 	}
+header("Content-type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=export_event.xls");
+// header('Content-type: application/csv'); //*** CSV ***//
+
 $sql = mysqli_query($objCon,
 "SELECT
 	*, 

@@ -1,6 +1,14 @@
 <?php
-    include("./connect.php");
-
+session_start();
+if ($_SESSION["level"]<>'superadmin' || time()-$_SESSION["login_time_stamp"] >1800)
+			{
+				session_destroy();
+				echo "<script>";
+				echo "window.location.assign('../')";
+				echo "</script>";
+			} else {
+				require('./connect.php');
+	}
     // $type = $_GET['type'];
     // $code = $_GET['code'];
 

@@ -9,9 +9,12 @@ session_start();
     $objQuery = mysqli_query($objCon, $strSQL);
     
 	while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
- 		$_SESSION["level"]=$row["level"];	
         array_push($products_arr["data"], $row);
     }
+	if ($row){
+ 		$_SESSION["level"]=$row["level"];	
+		$_SESSION["login_time_stamp"] = time(); 		
+		}
     http_response_code(200);
     echo json_encode($products_arr); 
 ?>
