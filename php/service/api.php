@@ -1,5 +1,11 @@
 <?php
-include("./connect.php");
+session_start();
+if ($_SESSION["level"]=='' || time()-$_SESSION["login_time_stamp"] >1800)
+			{
+				require('logout.php');
+			} else {
+				require('./connect.php');
+	}
 
 $type = $_GET['type'];
 $code = '';

@@ -2,10 +2,7 @@
 session_start();
 if ($_SESSION["level"]<>'superadmin' || time()-$_SESSION["login_time_stamp"] >1800)
 			{
-				session_destroy();
-				echo "<script>";
-				echo "window.location.assign('../')";
-				echo "</script>";
+				require('logout.php');
 			} else {
 				require('./connect.php');
 	}
