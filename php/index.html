@@ -309,8 +309,8 @@
 		let drowning_level = localStorage.getItem('drowning_level');
         
         let logout = () => {
-            localStorage.clear();
-            location.href = "./_form_login.html";
+            localStorage.clear(); 
+            location.href = "service/logout.php"; 
         }
 
         $("#logout").hide()
