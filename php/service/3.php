@@ -1,8 +1,8 @@
 <?PHP
 session_start();
-if ($_SESSION["level"]<>'superadmin' || time()-$_SESSION["login_time_stamp"] >1800)
+if ($_SESSION["level"]<>'' || time()-$_SESSION["login_time_stamp"] >1800)
 			{
-				require('logout.php');
+				require('./logout.php');
 			} else {
 				require('./connect.php');
 	}
