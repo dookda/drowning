@@ -7,7 +7,7 @@
     $products_arr["data"]=array();
 
     if($_POST["type"]=="username"){
-        $username = $_POST["username"];
+        $username = mysqli_real_escape_string($objCon,$_POST["username"]);
         $strSQL = "SELECT count(id) as cnt FROM user WHERE username='$username'";
         $objQuery = mysqli_query($objCon, $strSQL);
         while($row = mysqli_fetch_array($objQuery, MYSQLI_ASSOC)){
